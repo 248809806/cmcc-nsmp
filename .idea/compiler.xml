@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="cmcc-nsmp-web" />
+        <module name="namp-ambspeov-web" />
+        <module name="namp-ambsprov-service-impl" />
+        <module name="namp-ambsprov-service-interface" />
+        <module name="namp-assetprop-service-impl" />
+        <module name="namp-assetprop-service-interface" />
+        <module name="namp-assetprop-web" />
+        <module name="namp-common-utils" />
+        <module name="namp-groupprov-service-impl" />
+        <module name="namp-groupprov-service-interface" />
+        <module name="namp-groupprov-web" />
+        <module name="nsmp-asset-service-impl" />
+        <module name="nsmp-asset-service-interface" />
+        <module name="nsmp-asset-web" />
+        <module name="nsmp-common-dao" />
+        <module name="nsmp-common-pojo" />
+        <module name="nsmp-common-service" />
+        <module name="nsmp-redis" />
+        <module name="nsmp-user-service-impl" />
+        <module name="nsmp-user-service-interface" />
+        <module name="nsmp-user-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="nsmp-groupprov-web" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

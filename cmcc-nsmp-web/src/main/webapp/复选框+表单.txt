@@ -1,0 +1,45 @@
+function datadel() {
+        var arr=[];
+        $("[name = ids]:checkbox").each(function(){
+            if ($(this).prop("checked") == true){
+                arr.push($(this).val());
+            }
+        })
+	alert(arr.toString());
+        $.ajax({
+		url:'aaa?ids='+arr,
+		type:'get',
+		success:function () {
+			location.reload();
+            	}
+
+	});
+    }
+
+
+
+
+
+---------------------
+
+submitHandler:function(form){
+		    alert('提交表单');
+            var aaa= $("#form-member-add").serialize();
+username=tom&sex=nan&sxxxxx
+            alert(data)
+			$.ajax({
+				type:'post',
+				url:'bbb',
+				data:aaa,
+				success:function (aa) {
+					alert(aa);
+                    //$(form).ajaxSubmit();
+                    var index = parent.layer.getFrameIndex(window.name);
+                    //parent.$('.btn-refresh').click();
+
+                    parent.layer.close(index);
+
+                }
+			})
+
+		}

@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ultrapower.dao.AmAssetLoginPropMapper" >
+  <resultMap id="BaseResultMap" type="com.ultrapower.pojo.AmAssetLoginProp" >
+    <result column="PK_ASSET" property="pkAsset" jdbcType="CHAR" />
+    <result column="PROV_CODE" property="provCode" jdbcType="VARCHAR" />
+    <result column="VERSION" property="version" jdbcType="VARCHAR" />
+    <result column="DRIVER_PORT" property="driverPort" jdbcType="INTEGER" />
+    <result column="ADMIN_USER" property="adminUser" jdbcType="VARCHAR" />
+    <result column="ADMIN_PASSWORD" property="adminPassword" jdbcType="VARCHAR" />
+    <result column="ADMIN_PROMPT" property="adminPrompt" jdbcType="VARCHAR" />
+    <result column="CHAR_ENCODE" property="charEncode" jdbcType="CHAR" />
+    <result column="ECHO_TIME" property="echoTime" jdbcType="INTEGER" />
+    <result column="TIMEOUT" property="timeout" jdbcType="INTEGER" />
+    <result column="TRY_TIMES" property="tryTimes" jdbcType="INTEGER" />
+    <result column="WINDOWS_DRIVER" property="windowsDriver" jdbcType="CHAR" />
+    <result column="WINDOWS_DOMAIN" property="windowsDomain" jdbcType="VARCHAR" />
+    <result column="UNIX_DRIVER" property="unixDriver" jdbcType="CHAR" />
+    <result column="SU_USER" property="suUser" jdbcType="VARCHAR" />
+    <result column="SU_PASSWORD" property="suPassword" jdbcType="VARCHAR" />
+    <result column="SU_PROMPT" property="suPrompt" jdbcType="VARCHAR" />
+    <result column="NETDEVICE_DRIVER" property="netdeviceDriver" jdbcType="CHAR" />
+    <result column="ENABLE_COMMAND" property="enableCommand" jdbcType="VARCHAR" />
+    <result column="ENABLE_PASSWORD" property="enablePassword" jdbcType="VARCHAR" />
+    <result column="ENABLE_PROMPT" property="enablePrompt" jdbcType="VARCHAR" />
+    <result column="DB_DRIVER" property="dbDriver" jdbcType="CHAR" />
+    <result column="DB_NAME" property="dbName" jdbcType="VARCHAR" />
+    <result column="DB_SERVICE_NAME" property="dbServiceName" jdbcType="VARCHAR" />
+    <result column="DB_URL" property="dbUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PK_ASSET, PROV_CODE, VERSION, DRIVER_PORT, ADMIN_USER, ADMIN_PASSWORD, ADMIN_PROMPT, 
+    CHAR_ENCODE, ECHO_TIME, TIMEOUT, TRY_TIMES, WINDOWS_DRIVER, WINDOWS_DOMAIN, UNIX_DRIVER, 
+    SU_USER, SU_PASSWORD, SU_PROMPT, NETDEVICE_DRIVER, ENABLE_COMMAND, ENABLE_PASSWORD, 
+    ENABLE_PROMPT, DB_DRIVER, DB_NAME, DB_SERVICE_NAME, DB_URL
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ultrapower.pojo.AmAssetLoginPropExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from am_asset_login_prop
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ultrapower.pojo.AmAssetLoginPropExample" >
+    delete from am_asset_login_prop
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ultrapower.pojo.AmAssetLoginProp" >
+    insert into am_asset_login_prop (PK_ASSET, PROV_CODE, VERSION, 
+      DRIVER_PORT, ADMIN_USER, ADMIN_PASSWORD, 
+      ADMIN_PROMPT, CHAR_ENCODE, ECHO_TIME, 
+      TIMEOUT, TRY_TIMES, WINDOWS_DRIVER, 
+      WINDOWS_DOMAIN, UNIX_DRIVER, SU_USER, 
+      SU_PASSWORD, SU_PROMPT, NETDEVICE_DRIVER, 
+      ENABLE_COMMAND, ENABLE_PASSWORD, ENABLE_PROMPT, 
+      DB_DRIVER, DB_NAME, DB_SERVICE_NAME, 
+      DB_URL)
+    values (#{pkAsset,jdbcType=CHAR}, #{provCode,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, 
+      #{driverPort,jdbcType=INTEGER}, #{adminUser,jdbcType=VARCHAR}, #{adminPassword,jdbcType=VARCHAR}, 
+      #{adminPrompt,jdbcType=VARCHAR}, #{charEncode,jdbcType=CHAR}, #{echoTime,jdbcType=INTEGER}, 
+      #{timeout,jdbcType=INTEGER}, #{tryTimes,jdbcType=INTEGER}, #{windowsDriver,jdbcType=CHAR}, 
+      #{windowsDomain,jdbcType=VARCHAR}, #{unixDriver,jdbcType=CHAR}, #{suUser,jdbcType=VARCHAR}, 
+      #{suPassword,jdbcType=VARCHAR}, #{suPrompt,jdbcType=VARCHAR}, #{netdeviceDriver,jdbcType=CHAR}, 
+      #{enableCommand,jdbcType=VARCHAR}, #{enablePassword,jdbcType=VARCHAR}, #{enablePrompt,jdbcType=VARCHAR}, 
+      #{dbDriver,jdbcType=CHAR}, #{dbName,jdbcType=VARCHAR}, #{dbServiceName,jdbcType=VARCHAR}, 
+      #{dbUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ultrapower.pojo.AmAssetLoginProp" >
+    insert into am_asset_login_prop
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pkAsset != null" >
+        PK_ASSET,
+      </if>
+      <if test="provCode != null" >
+        PROV_CODE,
+      </if>
+      <if test="version != null" >
+        VERSION,
+      </if>
+      <if test="driverPort != null" >
+        DRIVER_PORT,
+      </if>
+      <if test="adminUser != null" >
+        ADMIN_USER,
+      </if>
+      <if test="adminPassword != null" >
+        ADMIN_PASSWORD,
+      </if>
+      <if test="adminPrompt != null" >
+        ADMIN_PROMPT,
+      </if>
+      <if test="charEncode != null" >
+        CHAR_ENCODE,
+      </if>
+      <if test="echoTime != null" >
+        ECHO_TIME,
+      </if>
+      <if test="timeout != null" >
+        TIMEOUT,
+      </if>
+      <if test="tryTimes != null" >
+        TRY_TIMES,
+      </if>
+      <if test="windowsDriver != null" >
+        WINDOWS_DRIVER,
+      </if>
+      <if test="windowsDomain != null" >
+        WINDOWS_DOMAIN,
+      </if>
+      <if test="unixDriver != null" >
+        UNIX_DRIVER,
+      </if>
+      <if test="suUser != null" >
+        SU_USER,
+      </if>
+      <if test="suPassword != null" >
+        SU_PASSWORD,
+      </if>
+      <if test="suPrompt != null" >
+        SU_PROMPT,
+      </if>
+      <if test="netdeviceDriver != null" >
+        NETDEVICE_DRIVER,
+      </if>
+      <if test="enableCommand != null" >
+        ENABLE_COMMAND,
+      </if>
+      <if test="enablePassword != null" >
+        ENABLE_PASSWORD,
+      </if>
+      <if test="enablePrompt != null" >
+        ENABLE_PROMPT,
+      </if>
+      <if test="dbDriver != null" >
+        DB_DRIVER,
+      </if>
+      <if test="dbName != null" >
+        DB_NAME,
+      </if>
+      <if test="dbServiceName != null" >
+        DB_SERVICE_NAME,
+      </if>
+      <if test="dbUrl != null" >
+        DB_URL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pkAsset != null" >
+        #{pkAsset,jdbcType=CHAR},
+      </if>
+      <if test="provCode != null" >
+        #{provCode,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="driverPort != null" >
+        #{driverPort,jdbcType=INTEGER},
+      </if>
+      <if test="adminUser != null" >
+        #{adminUser,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPassword != null" >
+        #{adminPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPrompt != null" >
+        #{adminPrompt,jdbcType=VARCHAR},
+      </if>
+      <if test="charEncode != null" >
+        #{charEncode,jdbcType=CHAR},
+      </if>
+      <if test="echoTime != null" >
+        #{echoTime,jdbcType=INTEGER},
+      </if>
+      <if test="timeout != null" >
+        #{timeout,jdbcType=INTEGER},
+      </if>
+      <if test="tryTimes != null" >
+        #{tryTimes,jdbcType=INTEGER},
+      </if>
+      <if test="windowsDriver != null" >
+        #{windowsDriver,jdbcType=CHAR},
+      </if>
+      <if test="windowsDomain != null" >
+        #{windowsDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="unixDriver != null" >
+        #{unixDriver,jdbcType=CHAR},
+      </if>
+      <if test="suUser != null" >
+        #{suUser,jdbcType=VARCHAR},
+      </if>
+      <if test="suPassword != null" >
+        #{suPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="suPrompt != null" >
+        #{suPrompt,jdbcType=VARCHAR},
+      </if>
+      <if test="netdeviceDriver != null" >
+        #{netdeviceDriver,jdbcType=CHAR},
+      </if>
+      <if test="enableCommand != null" >
+        #{enableCommand,jdbcType=VARCHAR},
+      </if>
+      <if test="enablePassword != null" >
+        #{enablePassword,jdbcType=VARCHAR},
+      </if>
+      <if test="enablePrompt != null" >
+        #{enablePrompt,jdbcType=VARCHAR},
+      </if>
+      <if test="dbDriver != null" >
+        #{dbDriver,jdbcType=CHAR},
+      </if>
+      <if test="dbName != null" >
+        #{dbName,jdbcType=VARCHAR},
+      </if>
+      <if test="dbServiceName != null" >
+        #{dbServiceName,jdbcType=VARCHAR},
+      </if>
+      <if test="dbUrl != null" >
+        #{dbUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ultrapower.pojo.AmAssetLoginPropExample" resultType="java.lang.Integer" >
+    select count(*) from am_asset_login_prop
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update am_asset_login_prop
+    <set >
+      <if test="record.pkAsset != null" >
+        PK_ASSET = #{record.pkAsset,jdbcType=CHAR},
+      </if>
+      <if test="record.provCode != null" >
+        PROV_CODE = #{record.provCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null" >
+        VERSION = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.driverPort != null" >
+        DRIVER_PORT = #{record.driverPort,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminUser != null" >
+        ADMIN_USER = #{record.adminUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminPassword != null" >
+        ADMIN_PASSWORD = #{record.adminPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminPrompt != null" >
+        ADMIN_PROMPT = #{record.adminPrompt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.charEncode != null" >
+        CHAR_ENCODE = #{record.charEncode,jdbcType=CHAR},
+      </if>
+      <if test="record.echoTime != null" >
+        ECHO_TIME = #{record.echoTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.timeout != null" >
+        TIMEOUT = #{record.timeout,jdbcType=INTEGER},
+      </if>
+      <if test="record.tryTimes != null" >
+        TRY_TIMES = #{record.tryTimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.windowsDriver != null" >
+        WINDOWS_DRIVER = #{record.windowsDriver,jdbcType=CHAR},
+      </if>
+      <if test="record.windowsDomain != null" >
+        WINDOWS_DOMAIN = #{record.windowsDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unixDriver != null" >
+        UNIX_DRIVER = #{record.unixDriver,jdbcType=CHAR},
+      </if>
+      <if test="record.suUser != null" >
+        SU_USER = #{record.suUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suPassword != null" >
+        SU_PASSWORD = #{record.suPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suPrompt != null" >
+        SU_PROMPT = #{record.suPrompt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.netdeviceDriver != null" >
+        NETDEVICE_DRIVER = #{record.netdeviceDriver,jdbcType=CHAR},
+      </if>
+      <if test="record.enableCommand != null" >
+        ENABLE_COMMAND = #{record.enableCommand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enablePassword != null" >
+        ENABLE_PASSWORD = #{record.enablePassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enablePrompt != null" >
+        ENABLE_PROMPT = #{record.enablePrompt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dbDriver != null" >
+        DB_DRIVER = #{record.dbDriver,jdbcType=CHAR},
+      </if>
+      <if test="record.dbName != null" >
+        DB_NAME = #{record.dbName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dbServiceName != null" >
+        DB_SERVICE_NAME = #{record.dbServiceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dbUrl != null" >
+        DB_URL = #{record.dbUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update am_asset_login_prop
+    set PK_ASSET = #{record.pkAsset,jdbcType=CHAR},
+      PROV_CODE = #{record.provCode,jdbcType=VARCHAR},
+      VERSION = #{record.version,jdbcType=VARCHAR},
+      DRIVER_PORT = #{record.driverPort,jdbcType=INTEGER},
+      ADMIN_USER = #{record.adminUser,jdbcType=VARCHAR},
+      ADMIN_PASSWORD = #{record.adminPassword,jdbcType=VARCHAR},
+      ADMIN_PROMPT = #{record.adminPrompt,jdbcType=VARCHAR},
+      CHAR_ENCODE = #{record.charEncode,jdbcType=CHAR},
+      ECHO_TIME = #{record.echoTime,jdbcType=INTEGER},
+      TIMEOUT = #{record.timeout,jdbcType=INTEGER},
+      TRY_TIMES = #{record.tryTimes,jdbcType=INTEGER},
+      WINDOWS_DRIVER = #{record.windowsDriver,jdbcType=CHAR},
+      WINDOWS_DOMAIN = #{record.windowsDomain,jdbcType=VARCHAR},
+      UNIX_DRIVER = #{record.unixDriver,jdbcType=CHAR},
+      SU_USER = #{record.suUser,jdbcType=VARCHAR},
+      SU_PASSWORD = #{record.suPassword,jdbcType=VARCHAR},
+      SU_PROMPT = #{record.suPrompt,jdbcType=VARCHAR},
+      NETDEVICE_DRIVER = #{record.netdeviceDriver,jdbcType=CHAR},
+      ENABLE_COMMAND = #{record.enableCommand,jdbcType=VARCHAR},
+      ENABLE_PASSWORD = #{record.enablePassword,jdbcType=VARCHAR},
+      ENABLE_PROMPT = #{record.enablePrompt,jdbcType=VARCHAR},
+      DB_DRIVER = #{record.dbDriver,jdbcType=CHAR},
+      DB_NAME = #{record.dbName,jdbcType=VARCHAR},
+      DB_SERVICE_NAME = #{record.dbServiceName,jdbcType=VARCHAR},
+      DB_URL = #{record.dbUrl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
