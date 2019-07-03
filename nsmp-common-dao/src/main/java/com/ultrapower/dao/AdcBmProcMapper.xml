@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ultrapower.dao.AdcBmPortMapper" >
-  <resultMap id="BaseResultMap" type="com.ultrapower.pojo.AdcBmPort" >
-    <id column="PK_BM_PORT" property="pkBmPort" jdbcType="CHAR" />
+<mapper namespace="com.ultrapower.dao.AdcBmProcMapper" >
+  <resultMap id="BaseResultMap" type="com.ultrapower.pojo.AdcBmProc" >
+    <result column="PK_BM_PROC" property="pkBmProc" jdbcType="CHAR" />
     <result column="VERSION" property="version" jdbcType="VARCHAR" />
     <result column="PROV_CODE" property="provCode" jdbcType="VARCHAR" />
-    <result column="PORT_TYPE" property="portType" jdbcType="INTEGER" />
-    <result column="PROTOCOL" property="protocol" jdbcType="VARCHAR" />
-    <result column="PORT" property="port" jdbcType="VARCHAR" />
+    <result column="PROC_TYPE" property="procType" jdbcType="INTEGER" />
+    <result column="PROC_NAME" property="procName" jdbcType="VARCHAR" />
     <result column="SEVERITY_LEVEL" property="severityLevel" jdbcType="INTEGER" />
     <result column="IS_DELETED" property="isDeleted" jdbcType="INTEGER" />
     <result column="PK_CREATOR" property="pkCreator" jdbcType="CHAR" />
@@ -74,16 +73,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    PK_BM_PORT, VERSION, PROV_CODE, PORT_TYPE, PROTOCOL, PORT, SEVERITY_LEVEL, IS_DELETED, 
+    PK_BM_PROC, VERSION, PROV_CODE, PROC_TYPE, PROC_NAME, SEVERITY_LEVEL, IS_DELETED, 
     PK_CREATOR, CREATE_TIME, PK_MENDER, MEND_TIME_LAST
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ultrapower.pojo.AdcBmPortExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ultrapower.pojo.AdcBmProcExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from adc_bm_port
+    from adc_bm_proc
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,39 +90,27 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from adc_bm_port
-    where PK_BM_PORT = #{pkBmPort,jdbcType=CHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from adc_bm_port
-    where PK_BM_PORT = #{pkBmPort,jdbcType=CHAR}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.ultrapower.pojo.AdcBmPortExample" >
-    delete from adc_bm_port
+  <delete id="deleteByExample" parameterType="com.ultrapower.pojo.AdcBmProcExample" >
+    delete from adc_bm_proc
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ultrapower.pojo.AdcBmPort" >
-    insert into adc_bm_port (PK_BM_PORT, VERSION, PROV_CODE, 
-      PORT_TYPE, PROTOCOL, PORT, 
-      SEVERITY_LEVEL, IS_DELETED, PK_CREATOR, 
-      CREATE_TIME, PK_MENDER, MEND_TIME_LAST
-      )
-    values (#{pkBmPort,jdbcType=CHAR}, #{version,jdbcType=VARCHAR}, #{provCode,jdbcType=VARCHAR}, 
-      #{portType,jdbcType=INTEGER}, #{protocol,jdbcType=VARCHAR}, #{port,jdbcType=VARCHAR}, 
-      #{severityLevel,jdbcType=INTEGER}, #{isDeleted,jdbcType=INTEGER}, #{pkCreator,jdbcType=CHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{pkMender,jdbcType=CHAR}, #{mendTimeLast,jdbcType=TIMESTAMP}
-      )
+  <insert id="insert" parameterType="com.ultrapower.pojo.AdcBmProc" >
+    insert into adc_bm_proc (PK_BM_PROC, VERSION, PROV_CODE, 
+      PROC_TYPE, PROC_NAME, SEVERITY_LEVEL, 
+      IS_DELETED, PK_CREATOR, CREATE_TIME, 
+      PK_MENDER, MEND_TIME_LAST)
+    values (#{pkBmProc,jdbcType=CHAR}, #{version,jdbcType=VARCHAR}, #{provCode,jdbcType=VARCHAR}, 
+      #{procType,jdbcType=INTEGER}, #{procName,jdbcType=VARCHAR}, #{severityLevel,jdbcType=INTEGER}, 
+      #{isDeleted,jdbcType=INTEGER}, #{pkCreator,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{pkMender,jdbcType=CHAR}, #{mendTimeLast,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.ultrapower.pojo.AdcBmPort" >
-    insert into adc_bm_port
+  <insert id="insertSelective" parameterType="com.ultrapower.pojo.AdcBmProc" >
+    insert into adc_bm_proc
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="pkBmPort != null" >
-        PK_BM_PORT,
+      <if test="pkBmProc != null" >
+        PK_BM_PROC,
       </if>
       <if test="version != null" >
         VERSION,
@@ -131,14 +118,11 @@
       <if test="provCode != null" >
         PROV_CODE,
       </if>
-      <if test="portType != null" >
-        PORT_TYPE,
+      <if test="procType != null" >
+        PROC_TYPE,
       </if>
-      <if test="protocol != null" >
-        PROTOCOL,
-      </if>
-      <if test="port != null" >
-        PORT,
+      <if test="procName != null" >
+        PROC_NAME,
       </if>
       <if test="severityLevel != null" >
         SEVERITY_LEVEL,
@@ -160,8 +144,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="pkBmPort != null" >
-        #{pkBmPort,jdbcType=CHAR},
+      <if test="pkBmProc != null" >
+        #{pkBmProc,jdbcType=CHAR},
       </if>
       <if test="version != null" >
         #{version,jdbcType=VARCHAR},
@@ -169,14 +153,11 @@
       <if test="provCode != null" >
         #{provCode,jdbcType=VARCHAR},
       </if>
-      <if test="portType != null" >
-        #{portType,jdbcType=INTEGER},
+      <if test="procType != null" >
+        #{procType,jdbcType=INTEGER},
       </if>
-      <if test="protocol != null" >
-        #{protocol,jdbcType=VARCHAR},
-      </if>
-      <if test="port != null" >
-        #{port,jdbcType=VARCHAR},
+      <if test="procName != null" >
+        #{procName,jdbcType=VARCHAR},
       </if>
       <if test="severityLevel != null" >
         #{severityLevel,jdbcType=INTEGER},
@@ -198,17 +179,17 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ultrapower.pojo.AdcBmPortExample" resultType="java.lang.Integer" >
-    select count(*) from adc_bm_port
+  <select id="countByExample" parameterType="com.ultrapower.pojo.AdcBmProcExample" resultType="java.lang.Integer" >
+    select count(*) from adc_bm_proc
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update adc_bm_port
+    update adc_bm_proc
     <set >
-      <if test="record.pkBmPort != null" >
-        PK_BM_PORT = #{record.pkBmPort,jdbcType=CHAR},
+      <if test="record.pkBmProc != null" >
+        PK_BM_PROC = #{record.pkBmProc,jdbcType=CHAR},
       </if>
       <if test="record.version != null" >
         VERSION = #{record.version,jdbcType=VARCHAR},
@@ -216,14 +197,11 @@
       <if test="record.provCode != null" >
         PROV_CODE = #{record.provCode,jdbcType=VARCHAR},
       </if>
-      <if test="record.portType != null" >
-        PORT_TYPE = #{record.portType,jdbcType=INTEGER},
+      <if test="record.procType != null" >
+        PROC_TYPE = #{record.procType,jdbcType=INTEGER},
       </if>
-      <if test="record.protocol != null" >
-        PROTOCOL = #{record.protocol,jdbcType=VARCHAR},
-      </if>
-      <if test="record.port != null" >
-        PORT = #{record.port,jdbcType=VARCHAR},
+      <if test="record.procName != null" >
+        PROC_NAME = #{record.procName,jdbcType=VARCHAR},
       </if>
       <if test="record.severityLevel != null" >
         SEVERITY_LEVEL = #{record.severityLevel,jdbcType=INTEGER},
@@ -249,13 +227,12 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update adc_bm_port
-    set PK_BM_PORT = #{record.pkBmPort,jdbcType=CHAR},
+    update adc_bm_proc
+    set PK_BM_PROC = #{record.pkBmProc,jdbcType=CHAR},
       VERSION = #{record.version,jdbcType=VARCHAR},
       PROV_CODE = #{record.provCode,jdbcType=VARCHAR},
-      PORT_TYPE = #{record.portType,jdbcType=INTEGER},
-      PROTOCOL = #{record.protocol,jdbcType=VARCHAR},
-      PORT = #{record.port,jdbcType=VARCHAR},
+      PROC_TYPE = #{record.procType,jdbcType=INTEGER},
+      PROC_NAME = #{record.procName,jdbcType=VARCHAR},
       SEVERITY_LEVEL = #{record.severityLevel,jdbcType=INTEGER},
       IS_DELETED = #{record.isDeleted,jdbcType=INTEGER},
       PK_CREATOR = #{record.pkCreator,jdbcType=CHAR},
@@ -266,66 +243,4 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ultrapower.pojo.AdcBmPort" >
-    update adc_bm_port
-    <set >
-      <if test="version != null" >
-        VERSION = #{version,jdbcType=VARCHAR},
-      </if>
-      <if test="provCode != null" >
-        PROV_CODE = #{provCode,jdbcType=VARCHAR},
-      </if>
-      <if test="portType != null" >
-        PORT_TYPE = #{portType,jdbcType=INTEGER},
-      </if>
-      <if test="protocol != null" >
-        PROTOCOL = #{protocol,jdbcType=VARCHAR},
-      </if>
-      <if test="port != null" >
-        PORT = #{port,jdbcType=VARCHAR},
-      </if>
-      <if test="severityLevel != null" >
-        SEVERITY_LEVEL = #{severityLevel,jdbcType=INTEGER},
-      </if>
-      <if test="isDeleted != null" >
-        IS_DELETED = #{isDeleted,jdbcType=INTEGER},
-      </if>
-      <if test="pkCreator != null" >
-        PK_CREATOR = #{pkCreator,jdbcType=CHAR},
-      </if>
-      <if test="createTime != null" >
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="pkMender != null" >
-        PK_MENDER = #{pkMender,jdbcType=CHAR},
-      </if>
-      <if test="mendTimeLast != null" >
-        MEND_TIME_LAST = #{mendTimeLast,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where PK_BM_PORT = #{pkBmPort,jdbcType=CHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ultrapower.pojo.AdcBmPort" >
-    update adc_bm_port
-    set VERSION = #{version,jdbcType=VARCHAR},
-      PROV_CODE = #{provCode,jdbcType=VARCHAR},
-      PORT_TYPE = #{portType,jdbcType=INTEGER},
-      PROTOCOL = #{protocol,jdbcType=VARCHAR},
-      PORT = #{port,jdbcType=VARCHAR},
-      SEVERITY_LEVEL = #{severityLevel,jdbcType=INTEGER},
-      IS_DELETED = #{isDeleted,jdbcType=INTEGER},
-      PK_CREATOR = #{pkCreator,jdbcType=CHAR},
-      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
-      PK_MENDER = #{pkMender,jdbcType=CHAR},
-      MEND_TIME_LAST = #{mendTimeLast,jdbcType=TIMESTAMP}
-    where PK_BM_PORT = #{pkBmPort,jdbcType=CHAR}
-  </update>
-
-  <select id="abcbmporplist" resultType="com.ultrapower.dto.Abcbmporp">
-    SELECT b.`PROV_NAME`,a.`SEVERITY_LEVEL`,a.`PORT_TYPE`,a.`PROTOCOL`,
-    a.`PORT`,c.`USER_ACCOUNT`,a.`MEND_TIME_LAST`
-    FROM  `adc_bm_port` a,`bdm_prov` b,`am_user` c
-    WHERE a.`PROV_CODE` = b.`PROV_CODE`
-    AND a.`PK_CREATOR` = c.`PK_NSMP_USER`
-  </select>
 </mapper>

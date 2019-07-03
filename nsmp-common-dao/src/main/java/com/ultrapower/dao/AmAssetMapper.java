@@ -1,5 +1,6 @@
 package com.ultrapower.dao;
 
+import com.ultrapower.dto.Amassetdto;
 import com.ultrapower.pojo.AmAsset;
 import com.ultrapower.pojo.AmAssetExample;
 import org.apache.ibatis.annotations.Param;
@@ -28,4 +29,6 @@ public interface AmAssetMapper {
     int updateByPrimaryKeySelective(AmAsset record);
 
     int updateByPrimaryKey(AmAsset record);
+
+    List<Amassetdto> Amassetlist();
 }

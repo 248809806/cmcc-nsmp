@@ -30,26 +30,26 @@
         <div class="text-c" style="background-color: #f2f0ff;line-height: 50px">
             省份：
             <span>
-                <select id="prov1" class="select" style="width: 130px;text-align-last: center;height: 30px;">
-                    <!--<option>所有</option>
+                <select class="select" style="width: 130px;text-align-last: center;height: 30px;">
+                    <option>所有</option>
                     <option>所有1</option>
-                    <option>所有2</option>-->
+                    <option>所有2</option>
                 </select>
             </span>&emsp;
             端口类型：
             <span>
-                <select id ="assetType" class="select" style="width: 150px;text-align-last: center;height: 30px">
-                    <!--<option>所有</option>
+                <select class="select" style="width: 150px;text-align-last: center;height: 30px">
+                    <option>所有</option>
                     <option>请选择1</option>
-                    <option>请选择2</option>-->
+                    <option>请选择2</option>
                 </select>
             </span>&emsp;
             协议：
             <span>
-                <select id="assetType1" class="select" style="width: 130px;text-align-last: center;height: 30px">
-                    <!--<option>所有</option>
+                <select class="select" style="width: 130px;text-align-last: center;height: 30px">
+                    <option>所有</option>
                     <option>请选择1</option>
-                    <option>请选择2</option>-->
+                    <option>请选择2</option>
                 </select>
             </span>&emsp;
 
@@ -77,7 +77,7 @@
                     </tr>
                 </thead>
                 <tbody id="tb">
-                    <!--<tr class="text-c">
+                    <tr class="text-c">
                         <td>1</td>
                         <td>北京</td>
                         <td>高</td>
@@ -87,10 +87,10 @@
                         <td>super</td>
                         <td>2019-06-25 15:58:35</td>
                         <td class="td-manage">
-                            <a title="编辑" href="javascript:;" onclick="edit_port_bm('编辑端口基准','admin-add.html','2','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
+                            <a title="编辑" href="javascript:;" onclick="edit_port_bm('编辑端口基准信息','adc_bm_port_edit.html','2','1000','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
                             <a title="删除" href="javascript:;" onclick="delete_port_bm(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
                         </td>
-                    </tr>-->
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -153,17 +153,12 @@
         });
     }
 
-
-
-$(function () {
-    init_bm_port();
-})
     /**
      *  端口基准列表
      */
     function init_bm_port(){
         $.ajax({
-            url:"abcbmporplist",
+            url:"",
             dataType:'json',
             success:function (data) {
                 provSelect(data.provs);//省份下拉框
@@ -179,13 +174,13 @@ $(function () {
         for(var i = 0 ; i < data.length ;i++){
             str += "<option value='"+data[i].provCode+"'>"+data[i].provName+"</option>";
         }
-        $("#prov1").html(str);
+        $("#prov").html(str);
     }
     /*端口类型下拉框*/
     function portTypesSelect(data) {
         var str = "<option value='' selected>所有</option>";
         for(var i = 0 ; i < data.length ;i++){
-            str += "<option value='"+data[i]+"'>"+data[i]+"</option>";
+            str += "<option value='"+data[i].pkAssetType+"'>"+data[i].typeName+"</option>";
         }
         $("#assetType").html(str);
     }
@@ -194,9 +189,9 @@ $(function () {
     function protocalSelect(data) {
         var str = "<option value='' selected>所有</option>";
         for(var i = 0 ; i < data.length ;i++){
-            str += "<option value='"+data[i]+"'>"+data[i]+"</option>";
+            str += "<option value='"+data[i].pkAssetType+"'>"+data[i].typeName+"</option>";
         }
-        $("#assetType1").html(str);
+        $("#assetType").html(str);
     }
 
     /*端口表格数据*/
@@ -205,17 +200,14 @@ $(function () {
         for(var i = 0 ; i < data.length ;i++){
             str += "<tr class=\"text-c\">" +
                 " <td>"+(i+1)+"</td>" +
+                "<td>"+data[i].g_BS_NAME+"</td>" +
                 "<td>"+data[i].prov_NAME+"</td>" +
-                "<td>"+f1(data[i].severity_LEVEL)+"</td>" +
-                "<td>"+f2(data[i].port_TYPE)+"</td>" +
-                "<td>"+data[i].protocol+"</td>" +
-                "<td>"+data[i].port+"</td>" +
-                "<td>"+data[i].user_ACCOUNT+"</td>" +
-                "<td>"+data[i].mend_TIME_LAST+"</td>" +
-                "<td class=\"td-manage\">\n" +
-                "<a title=\"编辑\" href=\"javascript:;\" onclick=\"edit_port_bm('编辑端口基准','admin-add.html','2','800','500')\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\">&#xe6df;</i></a>\n" +
-                "<a title=\"删除\" href=\"javascript:;\" onclick=\"delete_port_bm(this,'1')\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\">&#xe6e2;</i></a>\n" +
-                "</td>" +
+                "<td>"+data[i].p_BS_NAME+"</td>" +
+                "<td>"+data[i].asset_NAME+"</td>" +
+                "<td>"+data[i].asset_IP+"</td>" +
+                "<td>"+data[i].type_NAME+"</td>" +
+                "<td class=\"f-14\">" +
+                "<a style=\"text-decoration:none\"onclick=\"bs_group_look_asset('查看资产信息','bs_group_look_asset.html','0001','780','400')\" href=\"javascript:;\"><span style=\"color: #0e90d2\">查看</span></a>" +
                 " </td></tr>";
         }
         $("#tb").html(str);
@@ -231,24 +223,6 @@ $(function () {
                 portTable(data.ports);//表格数据
             }
         });
-    }
-
-    function f1(data) {
-        if(data == 0){
-            return "低";
-        }else if(data == 1){
-            return "中";
-        }else {
-            return "高"
-        }
-    }
-
-    function f2(data) {
-        if(data == 0){
-            return "禁止开放";
-        }else {
-            return "必须开放";
-        }
     }
 
 </script>

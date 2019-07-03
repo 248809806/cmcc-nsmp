@@ -1,5 +1,6 @@
 package com.ultrapower.service;
 
+import com.ultrapower.dto.AmassetpvlistVO;
 import com.ultrapower.pojo.AmAssetProp;
 
 import java.util.List;
@@ -77,6 +78,19 @@ public interface AssetpropserviceInterface {
      * @return
      */
     Map<String, Object> configShow(String current_node_click, String current_prop_config);
+
+    /**
+     * 添加资产属性表以及枚举类型对应的值域表
+     * @param amassetpvlistVO
+     * @return
+     */
+    Map<String,Object> addassetlist(AmassetpvlistVO amassetpvlistVO);
+
+    /**
+     * 查询（添加资产）里面的列表
+     * @return
+     */
+    Map<String,Object> selectassetinitlist();
 
 }
 

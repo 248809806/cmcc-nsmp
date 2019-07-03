@@ -2,18 +2,27 @@ package com.ultrapower.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.ultrapower.dao.AmAssetPropMapper;
-import com.ultrapower.dao.AmAssetTypeMapper;
-import com.ultrapower.dao.AmAssetTypePropMapper;
-import com.ultrapower.dao.AmPropClassMapper;
+import com.ultrapower.dao.*;
+import com.ultrapower.dto.Amassetdto;
+import com.ultrapower.dto.AmassetpvlistVO;
 import com.ultrapower.pojo.*;
 import com.ultrapower.utils.DatetypetoString;
+import com.ultrapower.utils.PkUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
 public class AssetpropserviceImpl implements AssetpropserviceInterface{
+
+    @Autowired
+    AmAssetMapper amAssetMapper;
+
+    @Autowired
+    AmAssetPropMapper assetPropMapper;
+
+    @Autowired
+    AmAssetPropValueMapper propValueMapper;
 
     @Autowired
     AmAssetTypeMapper assetTypeMapper;
@@ -268,6 +277,60 @@ public class AssetpropserviceImpl implements AssetpropserviceInterface{
         //2、属性名称、属性编码(根据属性id去属性表查询)
         AmAssetProp amAssetProp = amAssetPropMapper.selectByPrimaryKey(current_prop_config);
         map.put("amAssetProp",amAssetProp);
+        return map;
+    }
+
+    /**
+     * 添加资产属性表以及枚举类型对应的值域表
+     * @param amassetpvlistVO
+     * @return
+     */
+    public Map<String, Object> addassetlist(AmassetpvlistVO amassetpvlistVO) {
+        Map<String, Object> map = new HashMap<String, Object>();
+
+        try {
+            //资产属性表
+            AmAssetProp list = amassetpvlistVO.getAssetPropBaseInfo();
+            list.setPkAssetProp(PkUtils.getPrimaryKey());
+            Short s = 5;
+            list.setBsType(s);
+            Short s1 = 1;
+            list.setComeFrom(s1);
+            Short s2 = 0;
+            list.setIsDeleted(s2);
+            String replace = list.getCollectType().replace(",", "");
+            list.setCollectType(replace);
+            list.setPkCreator("aa6aa1d77251445c956f1b4504b1e981");
+            list.setCreateTime(new Date());
+            list.setPkMender("aa6aa1d77251445c956f1b4504b1e981");
+            list.setMendTimeLast(new Date());
+            assetPropMapper.insert(list);
+                if (list.getDataType().equals("E")) {
+                    //资产属性枚举的值域表
+                    List<AmAssetPropValue> assetPropValue = amassetpvlistVO.getAssetPropValues();
+                    for (int j = 0; j < assetPropValue.size(); j++) {
+                        AmAssetPropValue amAssetPropValue = assetPropValue.get(j);
+                        amAssetPropValue.setPkAssetPropValue(PkUtils.getPrimaryKey());
+                        amAssetPropValue.setPkAssetProp(list.getPkAssetProp());
+                        propValueMapper.insert(amAssetPropValue);
+                    }
+                }
+            map.put("code",1);
+            return map;
+        } catch (Exception e) {
+            map.put("code",0);
+            return map;
+        }
+    }
+
+    /**
+     * 查询（添加资产）里面的列表
+     * @return
+     */
+    public Map<String, Object> selectassetinitlist() {
+        Map<String, Object> map = new HashMap<String, Object>();
+        List<Amassetdto> amAssets = amAssetMapper.Amassetlist();
+        map.put("amAssets",amAssets);
         return map;
     }
 

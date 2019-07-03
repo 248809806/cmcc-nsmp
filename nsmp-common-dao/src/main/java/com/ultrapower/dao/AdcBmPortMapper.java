@@ -1,5 +1,6 @@
 package com.ultrapower.dao;
 
+import com.ultrapower.dto.Abcbmporp;
 import com.ultrapower.pojo.AdcBmPort;
 import com.ultrapower.pojo.AdcBmPortExample;
 import org.apache.ibatis.annotations.Param;
@@ -28,4 +29,6 @@ public interface AdcBmPortMapper {
     int updateByPrimaryKeySelective(AdcBmPort record);
 
     int updateByPrimaryKey(AdcBmPort record);
+
+    List<Abcbmporp> abcbmporplist();
 }

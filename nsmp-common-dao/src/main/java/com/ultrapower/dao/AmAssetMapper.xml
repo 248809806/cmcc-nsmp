@@ -573,4 +573,13 @@
       DELETE_TIME = #{deleteTime,jdbcType=TIMESTAMP}
     where PK_ASSET = #{pkAsset,jdbcType=CHAR}
   </update>
+
+  <select id="Amassetlist" resultType="com.ultrapower.dto.Amassetdto">
+    SELECT a.`PK_ASSET`, b.`PROV_NAME`,a.`ASSET_NAME`,a.`ASSET_IP`,c.`TYPE_NAME`,d.`BS_NAME`,
+    a.`COME_FROM`,a.`ASSET_STATE`
+    FROM `am_asset` a,`bdm_prov` b,`am_asset_type` c,am_bs_prov d
+    WHERE a.`PROV_CODE` = b.`PROV_CODE`
+    AND a.`PK_ASSET_TYPE` = c.`PK_ASSET_TYPE`
+    AND a.`PK_PROV_BS` = d.`PK_BS_PROV`;
+  </select>
 </mapper>

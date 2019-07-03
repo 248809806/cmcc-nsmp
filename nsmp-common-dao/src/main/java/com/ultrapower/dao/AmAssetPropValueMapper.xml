@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ultrapower.dao.AmAssetPropValueMapper" >
+  <resultMap id="BaseResultMap" type="com.ultrapower.pojo.AmAssetPropValue" >
+    <id column="PK_ASSET_PROP_VALUE" property="pkAssetPropValue" jdbcType="CHAR" />
+    <result column="PK_ASSET_PROP" property="pkAssetProp" jdbcType="CHAR" />
+    <result column="VALUE_NAME" property="valueName" jdbcType="VARCHAR" />
+    <result column="VALUE_CODE" property="valueCode" jdbcType="VARCHAR" />
+    <result column="VALUE_DESC" property="valueDesc" jdbcType="VARCHAR" />
+    <result column="PK_VALUE_PARENT" property="pkValueParent" jdbcType="CHAR" />
+    <result column="SERIESCODE" property="seriescode" jdbcType="VARCHAR" />
+    <result column="DISPLAY_IDX" property="displayIdx" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PK_ASSET_PROP_VALUE, PK_ASSET_PROP, VALUE_NAME, VALUE_CODE, VALUE_DESC, PK_VALUE_PARENT, 
+    SERIESCODE, DISPLAY_IDX
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ultrapower.pojo.AmAssetPropValueExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from am_asset_prop_value
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from am_asset_prop_value
+    where PK_ASSET_PROP_VALUE = #{pkAssetPropValue,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from am_asset_prop_value
+    where PK_ASSET_PROP_VALUE = #{pkAssetPropValue,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ultrapower.pojo.AmAssetPropValueExample" >
+    delete from am_asset_prop_value
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ultrapower.pojo.AmAssetPropValue" >
+    insert into am_asset_prop_value (PK_ASSET_PROP_VALUE, PK_ASSET_PROP, VALUE_NAME, 
+      VALUE_CODE, VALUE_DESC, PK_VALUE_PARENT, 
+      SERIESCODE, DISPLAY_IDX)
+    values (#{pkAssetPropValue,jdbcType=CHAR}, #{pkAssetProp,jdbcType=CHAR}, #{valueName,jdbcType=VARCHAR}, 
+      #{valueCode,jdbcType=VARCHAR}, #{valueDesc,jdbcType=VARCHAR}, #{pkValueParent,jdbcType=CHAR}, 
+      #{seriescode,jdbcType=VARCHAR}, #{displayIdx,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ultrapower.pojo.AmAssetPropValue" >
+    insert into am_asset_prop_value
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pkAssetPropValue != null" >
+        PK_ASSET_PROP_VALUE,
+      </if>
+      <if test="pkAssetProp != null" >
+        PK_ASSET_PROP,
+      </if>
+      <if test="valueName != null" >
+        VALUE_NAME,
+      </if>
+      <if test="valueCode != null" >
+        VALUE_CODE,
+      </if>
+      <if test="valueDesc != null" >
+        VALUE_DESC,
+      </if>
+      <if test="pkValueParent != null" >
+        PK_VALUE_PARENT,
+      </if>
+      <if test="seriescode != null" >
+        SERIESCODE,
+      </if>
+      <if test="displayIdx != null" >
+        DISPLAY_IDX,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pkAssetPropValue != null" >
+        #{pkAssetPropValue,jdbcType=CHAR},
+      </if>
+      <if test="pkAssetProp != null" >
+        #{pkAssetProp,jdbcType=CHAR},
+      </if>
+      <if test="valueName != null" >
+        #{valueName,jdbcType=VARCHAR},
+      </if>
+      <if test="valueCode != null" >
+        #{valueCode,jdbcType=VARCHAR},
+      </if>
+      <if test="valueDesc != null" >
+        #{valueDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="pkValueParent != null" >
+        #{pkValueParent,jdbcType=CHAR},
+      </if>
+      <if test="seriescode != null" >
+        #{seriescode,jdbcType=VARCHAR},
+      </if>
+      <if test="displayIdx != null" >
+        #{displayIdx,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ultrapower.pojo.AmAssetPropValueExample" resultType="java.lang.Integer" >
+    select count(*) from am_asset_prop_value
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update am_asset_prop_value
+    <set >
+      <if test="record.pkAssetPropValue != null" >
+        PK_ASSET_PROP_VALUE = #{record.pkAssetPropValue,jdbcType=CHAR},
+      </if>
+      <if test="record.pkAssetProp != null" >
+        PK_ASSET_PROP = #{record.pkAssetProp,jdbcType=CHAR},
+      </if>
+      <if test="record.valueName != null" >
+        VALUE_NAME = #{record.valueName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.valueCode != null" >
+        VALUE_CODE = #{record.valueCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.valueDesc != null" >
+        VALUE_DESC = #{record.valueDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pkValueParent != null" >
+        PK_VALUE_PARENT = #{record.pkValueParent,jdbcType=CHAR},
+      </if>
+      <if test="record.seriescode != null" >
+        SERIESCODE = #{record.seriescode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.displayIdx != null" >
+        DISPLAY_IDX = #{record.displayIdx,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update am_asset_prop_value
+    set PK_ASSET_PROP_VALUE = #{record.pkAssetPropValue,jdbcType=CHAR},
+      PK_ASSET_PROP = #{record.pkAssetProp,jdbcType=CHAR},
+      VALUE_NAME = #{record.valueName,jdbcType=VARCHAR},
+      VALUE_CODE = #{record.valueCode,jdbcType=VARCHAR},
+      VALUE_DESC = #{record.valueDesc,jdbcType=VARCHAR},
+      PK_VALUE_PARENT = #{record.pkValueParent,jdbcType=CHAR},
+      SERIESCODE = #{record.seriescode,jdbcType=VARCHAR},
+      DISPLAY_IDX = #{record.displayIdx,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ultrapower.pojo.AmAssetPropValue" >
+    update am_asset_prop_value
+    <set >
+      <if test="pkAssetProp != null" >
+        PK_ASSET_PROP = #{pkAssetProp,jdbcType=CHAR},
+      </if>
+      <if test="valueName != null" >
+        VALUE_NAME = #{valueName,jdbcType=VARCHAR},
+      </if>
+      <if test="valueCode != null" >
+        VALUE_CODE = #{valueCode,jdbcType=VARCHAR},
+      </if>
+      <if test="valueDesc != null" >
+        VALUE_DESC = #{valueDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="pkValueParent != null" >
+        PK_VALUE_PARENT = #{pkValueParent,jdbcType=CHAR},
+      </if>
+      <if test="seriescode != null" >
+        SERIESCODE = #{seriescode,jdbcType=VARCHAR},
+      </if>
+      <if test="displayIdx != null" >
+        DISPLAY_IDX = #{displayIdx,jdbcType=INTEGER},
+      </if>
+    </set>
+    where PK_ASSET_PROP_VALUE = #{pkAssetPropValue,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ultrapower.pojo.AmAssetPropValue" >
+    update am_asset_prop_value
+    set PK_ASSET_PROP = #{pkAssetProp,jdbcType=CHAR},
+      VALUE_NAME = #{valueName,jdbcType=VARCHAR},
+      VALUE_CODE = #{valueCode,jdbcType=VARCHAR},
+      VALUE_DESC = #{valueDesc,jdbcType=VARCHAR},
+      PK_VALUE_PARENT = #{pkValueParent,jdbcType=CHAR},
+      SERIESCODE = #{seriescode,jdbcType=VARCHAR},
+      DISPLAY_IDX = #{displayIdx,jdbcType=INTEGER}
+    where PK_ASSET_PROP_VALUE = #{pkAssetPropValue,jdbcType=CHAR}
+  </update>
+</mapper>

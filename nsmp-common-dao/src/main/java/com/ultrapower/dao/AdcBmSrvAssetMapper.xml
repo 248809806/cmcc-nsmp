@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ultrapower.dao.AdcBmSrvAssetMapper" >
+  <resultMap id="BaseResultMap" type="com.ultrapower.pojo.AdcBmSrvAsset" >
+    <result column="PK_BM_SRV_ASSET" property="pkBmSrvAsset" jdbcType="CHAR" />
+    <result column="PK_BM_SRV" property="pkBmSrv" jdbcType="CHAR" />
+    <result column="PK_ASSET" property="pkAsset" jdbcType="CHAR" />
+    <result column="VERSION" property="version" jdbcType="VARCHAR" />
+    <result column="PROV_CODE" property="provCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PK_BM_SRV_ASSET, PK_BM_SRV, PK_ASSET, VERSION, PROV_CODE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ultrapower.pojo.AdcBmSrvAssetExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from adc_bm_srv_asset
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ultrapower.pojo.AdcBmSrvAssetExample" >
+    delete from adc_bm_srv_asset
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ultrapower.pojo.AdcBmSrvAsset" >
+    insert into adc_bm_srv_asset (PK_BM_SRV_ASSET, PK_BM_SRV, PK_ASSET, 
+      VERSION, PROV_CODE)
+    values (#{pkBmSrvAsset,jdbcType=CHAR}, #{pkBmSrv,jdbcType=CHAR}, #{pkAsset,jdbcType=CHAR}, 
+      #{version,jdbcType=VARCHAR}, #{provCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ultrapower.pojo.AdcBmSrvAsset" >
+    insert into adc_bm_srv_asset
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pkBmSrvAsset != null" >
+        PK_BM_SRV_ASSET,
+      </if>
+      <if test="pkBmSrv != null" >
+        PK_BM_SRV,
+      </if>
+      <if test="pkAsset != null" >
+        PK_ASSET,
+      </if>
+      <if test="version != null" >
+        VERSION,
+      </if>
+      <if test="provCode != null" >
+        PROV_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pkBmSrvAsset != null" >
+        #{pkBmSrvAsset,jdbcType=CHAR},
+      </if>
+      <if test="pkBmSrv != null" >
+        #{pkBmSrv,jdbcType=CHAR},
+      </if>
+      <if test="pkAsset != null" >
+        #{pkAsset,jdbcType=CHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="provCode != null" >
+        #{provCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ultrapower.pojo.AdcBmSrvAssetExample" resultType="java.lang.Integer" >
+    select count(*) from adc_bm_srv_asset
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update adc_bm_srv_asset
+    <set >
+      <if test="record.pkBmSrvAsset != null" >
+        PK_BM_SRV_ASSET = #{record.pkBmSrvAsset,jdbcType=CHAR},
+      </if>
+      <if test="record.pkBmSrv != null" >
+        PK_BM_SRV = #{record.pkBmSrv,jdbcType=CHAR},
+      </if>
+      <if test="record.pkAsset != null" >
+        PK_ASSET = #{record.pkAsset,jdbcType=CHAR},
+      </if>
+      <if test="record.version != null" >
+        VERSION = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provCode != null" >
+        PROV_CODE = #{record.provCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update adc_bm_srv_asset
+    set PK_BM_SRV_ASSET = #{record.pkBmSrvAsset,jdbcType=CHAR},
+      PK_BM_SRV = #{record.pkBmSrv,jdbcType=CHAR},
+      PK_ASSET = #{record.pkAsset,jdbcType=CHAR},
+      VERSION = #{record.version,jdbcType=VARCHAR},
+      PROV_CODE = #{record.provCode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

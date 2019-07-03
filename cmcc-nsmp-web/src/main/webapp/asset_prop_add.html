@@ -1,0 +1,368 @@
+<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="Bookmark" href="/favicon.ico" >
+<link rel="Shortcut Icon" href="/favicon.ico" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5shiv.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<!--/meta 作为公共模版分离出去-->
+
+<title>添加用户 - H-ui.admin v3.1</title>
+<meta name="keywords" content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
+<meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
+</head>
+<body>
+<article class="page-container">基本信息<hr>
+	<form action="" method="post" class="form form-horizontal" id="form-prop-add">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>属性名称：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input style="width: 60%" type="text" class="input-text" id="propName">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>属性编码：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input style="width: 60%" type="text" class="input-text" id="propCode">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>属性描述：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input style="width: 60%" type="text" class="input-text" id="propDesc">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">属性分类：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<span class="select-box" style="width: 60%">
+					<select class="select" size="1" id="pkPropClass">
+						<option value="cced8f1871234167a4b7fa5380e0d11a">基本信息</option>
+						<option value="cced8f1871234167a4b7fa5380e0d11b">管理信息</option>
+						<option value="cced8f1871234167a4b7fa5380e0d11c">策略信息</option>
+					</select>
+				</span>
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>结构类型（数据类型）：</label>
+			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+				<div class="radio-box">
+					<input type="radio" id="dataType-1" name="dataType" value="S" checked>
+					<label for="dataType-1" onclick="show_enum_div('n')">字符</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="dataType-2" name="dataType" value="D">
+					<label for="dataType-2" onclick="show_enum_div('n')">日期</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="dataType-3" name="dataType" value="N">
+					<label for="dataType-3" onclick="show_enum_div('n')">数字</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="dataType-4" name="dataType" value="E">
+					<label for="dataType-4" onclick="show_enum_div('e')">枚举</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>是否必填：</label>
+			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+				<div class="check-box">
+					<input name="needValue" type="checkbox" value="1" id="needValue" checked>
+					<label for="needValue">必填</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>是否显示：</label>
+			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+				<div class="check-box">
+					<input name="isView" type="checkbox" value="1" id="isView" checked>
+					<label for="isView">显示</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>采集方式：</label>
+			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+				<div class="check-box">
+					<input type="checkbox" id="collectType-1" name="collectType" value="1">
+					<label for="collectType-1">人工录入</label>
+				</div>
+				<div class="check-box">
+					<input type="checkbox" id="collectType-2" name="collectType" checked value="1">
+					<label for="collectType-2">登录采集</label>
+				</div>
+				<div class="check-box">
+					<input type="checkbox" id="collectType-3" name="collectType" checked value="1">
+					<label for="collectType-3">远程扫描</label>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<div id="enum_div" style="display: none">枚举值<hr><br>
+		<table class="table table-border table-bordered table-bg">
+			<thead>
+				<tr class="text-c">
+					<th width="50">序号</th>
+					<th width="100">值域名称</th>
+					<th width="100">值域编码</th>
+					<th width="100">值域描述</th>
+					<th width="100">显示顺序</th>
+					<th width="100">操作</th>
+				</tr>
+			</thead>
+			<tbody id="tb">
+				<tr>
+					<td>1</td>
+					<td><input type="text" name="valueName"></td>
+					<td><input type="text" name="valueCode"></td>
+					<td><input type="text" name="valueDesc"></td>
+					<td><input type="text" name="displayIdx"></td>
+					<td>
+						<a onclick="addrow()"><span style="font-weight: bold;font-size: 20px">+</span></a>
+						<a onclick="removeRow(this)"><span style="font-weight: bold;font-size: 20px">-</span></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<br>
+	<div class="row cl">
+		<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+			<input class="btn btn-default radius" onclick="cancel()" type="button" value="&nbsp;&nbsp;取消&nbsp;&nbsp;">
+			<input class="btn btn-primary radius" onclick="saveProp()" type="button" value="&nbsp;&nbsp;保存&nbsp;&nbsp;">
+		</div>
+	</div>
+</article>
+
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script> 
+<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本--> 
+<script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" src="lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" src="lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+	
+	$("#form-prop-add").validate({
+		rules:{
+			username:{
+				required:true,
+				minlength:2,
+				maxlength:16
+			},
+			sex:{
+				required:true,
+			},
+			mobile:{
+				required:true,
+				isMobile:true,
+			},
+			email:{
+				required:true,
+				email:true,
+			},
+			uploadfile:{
+				required:true,
+			},
+			
+		},
+		onkeyup:false,
+		focusCleanup:true,
+		success:"valid",
+		submitHandler:function(form){
+			//$(form).ajaxSubmit();
+			var index = parent.layer.getFrameIndex(window.name);
+			//parent.$('.btn-refresh').click();
+			parent.layer.close(index);
+		}
+	});
+});
+</script> 
+<!--/请在上方写此页面业务相关的脚本-->
+<script>
+	function show_enum_div(e) {
+	    if(e == 'e'){
+            $("#enum_div").show();
+		}else{
+            $("#enum_div").hide();
+		}
+
+    }
+
+    /*取消*/
+    function cancel() {
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);//关闭窗口
+    }
+
+    /*添加行*/
+    var i = 2;
+    function addrow() {
+        var s = "<tr>" +
+			"<td>"+(i++)+"</td>" +
+			"<td><input type=\"text\" name=\"valueName\"></td>" +
+			"<td><input type=\"text\" name=\"valueCode\"></td>" +
+			"<td><input type=\"text\" name=\"valueDesc\"></td>" +
+			"<td><input type=\"text\" name=\"displayIdx\"></td>" +
+			"<td>" +
+			"<a onclick=\"addrow()\"><span style=\"font-weight: bold;font-size: 20px\">+</span></a>" +
+			"<a onclick=\"removeRow(this)\"><span style=\"font-weight: bold;font-size: 20px\">-</span></a>" +
+			"</td>" +
+			"</tr>";
+        $("#tb").append(s);
+    }
+
+    /*删除行*/
+    function removeRow(obj) {
+        $(obj).parents("tr").remove();/*删减掉当前行tr*/
+    }
+
+    /*保存*/
+    function saveProp() {
+        var arr = [];//选中枚举类型，添加的N行枚举值，每一行对应一个json对象，放到arr数组中
+        $('#tb tr').each(function(i){
+
+            //取表格的第i行第n列的标签的值
+            var valueName = $(this).find('td:eq(1) input').val();
+            var valueCode = $(this).find('td:eq(2) input').val();
+            var valueDesc = $(this).find('td:eq(3) input').val();
+            var displayIdx = $(this).find('td:eq(4) input').val();
+            var assetPropValue = { 'valueName': ''+valueName+'', 'valueCode': ''+valueCode+'','valueDesc': ''+valueDesc+'','displayIdx': ''+displayIdx+'' };
+
+            arr.push(assetPropValue)
+        });
+
+
+        /////////////////////////////////////////////////
+        var propName = $("#propName").val();
+        var propCode = $("#propCode").val();
+        var propDesc = $("#propDesc").val();
+        var pkPropClass = $("#pkPropClass").val();
+        var dataType = $('input[name="dataType"]:checked').val();
+
+        var needValue=[];
+        $("[name = needValue]:checkbox").each(function(){
+            if ($(this).prop("checked")){
+                needValue.push(1);
+            }else {
+                needValue.push(0);
+            }
+        });
+
+        var isView=[];
+        $("[name = isView]:checkbox").each(function(){
+            if ($(this).prop("checked")){
+                isView.push(1);
+            }else {
+                isView.push(0);
+            }
+        });
+
+        var collectType=[];
+        $("[name = collectType]:checkbox").each(function(){
+            if ($(this).prop("checked")){
+                collectType.push(1);
+            }else {
+                collectType.push(0);
+            }
+        });
+
+        var assetPropBaseInfo = { 'propName': ''+propName+'', 'propCode': ''+propCode+'','propDesc': ''+propDesc+'','pkPropClass': ''+pkPropClass+'','dataType': ''+dataType+'' ,'needValue': ''+needValue+'' ,'isView': ''+isView+'' ,'collectType': ''+collectType+'' };
+///////////////////////////////
+
+        var reqVO = {'assetPropValues': arr ,'assetPropBaseInfo': assetPropBaseInfo};
+
+        $.ajax({
+            url:'/addassetlist',
+            type:'post',
+            data:JSON.stringify(reqVO),
+            dataType:'json',
+            contentType:'application/json;charset=UTF-8',
+            success:function (data) {
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.msg('添加成功!',{icon:1,time:1200});
+                parent.layer.close(index);//关闭窗口
+            },
+            error:function () {
+                alert("请求失败");
+            }
+        });
+
+    }
+
+    function propBaseInfo(){
+        var propName = $("#propName").val();
+        var propCode = $("#propCode").val();
+        var propDesc = $("#propDesc").val();
+        var pkPropClass = $("#pkPropClass").val();
+        var dataType = $('input[name="dataType"]:checked').val();
+
+        var needValue=[];
+        $("[name = needValue]:checkbox").each(function(){
+            if ($(this).prop("checked")){
+                needValue.push(1);
+            }else {
+                needValue.push(0);
+            }
+        });
+
+        var isView=[];
+        $("[name = isView]:checkbox").each(function(){
+            if ($(this).prop("checked")){
+                isView.push(1);
+            }else {
+                isView.push(0);
+            }
+        });
+
+        var collectType=[];
+        $("[name = collectType]:checkbox").each(function(){
+            if ($(this).prop("checked")){
+                collectType.push(1);
+            }else {
+                collectType.push(0);
+			}
+        });
+
+        var assetPropBaseInfo = { 'propName': ''+propName+'', 'propCode': ''+propCode+'','propDesc': ''+propDesc+'','pkPropClass': ''+pkPropClass+'','dataType': ''+dataType+'' ,'needValue': ''+needValue+'' ,'isView': ''+isView+'' ,'collectType': ''+collectType+'' };
+		return assetPropBaseInfo;
+    }
+
+</script>
+</body>
+</html>
