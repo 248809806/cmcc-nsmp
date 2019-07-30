@@ -10,6 +10,11 @@
          http://www.springframework.org/schema/context
          http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
+    <!-- 注解驱动 -->
+    <mvc:annotation-driven />
+    <!--SpringMVC静态资源排除掉-->
+    <mvc:resources mapping="/*" location="/" />
+
     <!-- 扫描@Controller注解,多个包中间使用逗号分隔 -->
     <context:component-scan base-package="com.ultrapower.web" />
 
@@ -19,7 +24,7 @@
     <!-- 视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!-- 前缀 -->
-        <property name="prefix" value="/WEB-INF/views/" />
+        <property name="prefix" value="/" />
         <!-- 后缀 -->
         <property name="suffix" value=".jsp" />
     </bean>

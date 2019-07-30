@@ -2,22 +2,18 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:rabbit="http://www.springframework.org/schema/rabbit"
-       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
      http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
      http://www.springframework.org/schema/beans
      http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
      http://www.springframework.org/schema/rabbit
-     http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd
-     http://www.springframework.org/schema/context
-     http://www.springframework.org/schema/context/spring-context.xsd">
+     http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd">
 
-    <context:component-scan base-package="com.ultrapower.web.redditmq"/>
 
     <!-- 配置rabbitmq服务信息 -->
     <rabbit:connection-factory id="connectionFactory"
                                username="admin" password="admin"
-                               host="192.168.27.135" port="5672"/>
+                               host="192.168.231.142" port="5672"/>
 
     <!--定义rabbit template用于消息的接收和发送 -->
     <rabbit:template id="amqpTemplate"
@@ -26,23 +22,24 @@
     <rabbit:admin connection-factory="connectionFactory"/>
 
     <!--定义名称为queueTest的队列-->
-    <rabbit:queue name="queueTest" />
+    <rabbit:queue name="assetFilesQueue" />
 
     <!-- 定义direct类型的交换器，绑定 binding key = queueTest -->
     <rabbit:direct-exchange name="exchangeTest">
         <rabbit:bindings>
-            <rabbit:binding queue="queueTest" key="queueTestKey" />
+            <rabbit:binding queue="assetFilesQueue" key="assetFilesBindingKey" />
         </rabbit:bindings>
     </rabbit:direct-exchange>
 
-    <!-- 消息接收者 -->
-    <bean id="messageReceiver"
-          class="com.ultrapower.web.redditmq.MessageConsumer">
+    <!-- 消息接收者(资产档案) -->
+    <bean id="assetMessageReceiver"
+          class="com.ultrapower.mq.AssetFilesConsumer">
     </bean>
 
     <!--指定队列的订阅端（消息接收端）-->
     <rabbit:listener-container connection-factory="connectionFactory">
-        <rabbit:listener queues="queueTest" ref="messageReceiver" />
+        <!--messageReceiver这个消息订阅端，订阅了queueTest这个队列-->
+        <rabbit:listener queues="assetFilesQueue" ref="assetMessageReceiver" />
     </rabbit:listener-container>
 
 </beans>

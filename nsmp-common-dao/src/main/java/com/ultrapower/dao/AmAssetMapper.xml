@@ -574,12 +574,24 @@
     where PK_ASSET = #{pkAsset,jdbcType=CHAR}
   </update>
 
-  <select id="Amassetlist" resultType="com.ultrapower.dto.Amassetdto">
-    SELECT a.`PK_ASSET`, b.`PROV_NAME`,a.`ASSET_NAME`,a.`ASSET_IP`,c.`TYPE_NAME`,d.`BS_NAME`,
-    a.`COME_FROM`,a.`ASSET_STATE`
-    FROM `am_asset` a,`bdm_prov` b,`am_asset_type` c,am_bs_prov d
+  <select id="Amassetlist" resultMap="assetMap">
+    SELECT a.`PK_ASSET`,a.`ASSET_NAME`,a.`ASSET_IP`,b.`PROV_NAME`,c.`BS_NAME` ,d.`TYPE_NAME`,
+    (CASE a.`COME_FROM` WHEN 1 THEN '自定义' WHEN 0 THEN '系统内置' ELSE '未知' END ) AS 'COME_FROM',
+    (CASE a.`ASSET_STATE` WHEN 1 THEN '临时' WHEN 2 THEN '有效' WHEN 3 THEN '停用' WHEN 4 THEN '删除' ELSE '未知' END ) AS 'ASSET_STATE'
+    FROM `am_asset` a,`bdm_prov` b,`am_bs_prov` c,`am_asset_type` d
     WHERE a.`PROV_CODE` = b.`PROV_CODE`
-    AND a.`PK_ASSET_TYPE` = c.`PK_ASSET_TYPE`
-    AND a.`PK_PROV_BS` = d.`PK_BS_PROV`;
+    AND a.`PK_PROV_BS` = c.`PK_BS_PROV`
+    AND a.`PK_ASSET_TYPE` = d.`PK_ASSET_TYPE`
+    AND a.`ASSET_STATE` != 4
   </select>
+  <resultMap id="assetMap" type="com.ultrapower.dto.Amassetdto">
+    <result property="pkAsset" column="PK_ASSET" />
+    <result property="assetName" column="ASSET_NAME" />
+    <result property="assetIp" column="ASSET_IP" />
+    <result property="provName" column="PROV_NAME" />
+    <result property="bsName" column="BS_NAME" />
+    <result property="typeName" column="TYPE_NAME" />
+    <result property="comeFrom" column="COME_FROM" />
+    <result property="assetState" column="ASSET_STATE" />
+  </resultMap>
 </mapper>

@@ -419,4 +419,29 @@
     AND b.`PK_ASSET_TYPE` = #{PK_ASSET_TYPE}
     AND  a.`PROP_NAME` LIKE #{PROP_NAME}
   </select>
+
+  <select id="getAssetPropByPkAssetType" parameterType="string" resultMap="getAssetPropByPkAssetTypeMap">
+    SELECT a.* FROM am_asset_prop a, am_asset_type_prop b
+WHERE b.`PK_ASSET_TYPE` = #{id}
+AND b.`PK_ASSET_PROP` = a.`PK_ASSET_PROP`;
+  </select>
+
+  <resultMap id="getAssetPropByPkAssetTypeMap" type="com.ultrapower.dto.AmAssetPropDTO" >
+    <id column="PK_ASSET_PROP" property="pkAssetProp" jdbcType="CHAR" />
+    <result column="PROP_NAME" property="propName" jdbcType="VARCHAR" />
+    <result column="PROP_CODE" property="propCode" jdbcType="VARCHAR" />
+    <result column="PROP_DESC" property="propDesc" jdbcType="VARCHAR" />
+    <result column="PK_PROP_CLASS" property="pkPropClass" jdbcType="CHAR" />
+    <result column="BS_TYPE" property="bsType" jdbcType="SMALLINT" />
+    <result column="DATA_TYPE" property="dataType" jdbcType="CHAR" />
+    <result column="IS_VIEW" property="isView" jdbcType="SMALLINT" />
+    <result column="NEED_VALUE" property="needValue" jdbcType="SMALLINT" />
+    <result column="COLLECT_TYPE" property="collectType" jdbcType="CHAR" />
+    <result column="COME_FROM" property="comeFrom" jdbcType="SMALLINT" />
+    <result column="IS_DELETED" property="isDeleted" jdbcType="SMALLINT" />
+    <result column="PK_CREATOR" property="pkCreator" jdbcType="CHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="PK_MENDER" property="pkMender" jdbcType="CHAR" />
+    <result column="MEND_TIME_LAST" property="mendTimeLast" jdbcType="TIMESTAMP" />
+  </resultMap>
 </mapper>

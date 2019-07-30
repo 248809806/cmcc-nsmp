@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations="classpath:applicationContext-mongodb.xml")
+@ContextConfiguration(locations= "classpath:applicationContext-mongodb.xml")
 public class MongoTest {
 
     @Autowired

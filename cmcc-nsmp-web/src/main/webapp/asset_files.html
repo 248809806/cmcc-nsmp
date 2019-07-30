@@ -1,0 +1,167 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5shiv.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/style.css" />
+<link rel="stylesheet" href="lib/zTree/v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<!--[if IE 6]>
+<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i>首页<span class="c-gray en">&gt;</span>资产管理<span class="c-gray en">&gt;</span>资产档案</nav>
+
+<table class="table">
+	<tr>
+		<td style="width: 12%" class="va-t">
+			<!--<br>-->
+			<div style="background-color: #f2f0ff;height: 30px;text-align: center;line-height: 30px;font-weight: bold">
+				· 资产信息
+			</div>
+			<ul id="treeDemo" class="ztree"></ul>
+		</td>
+		<td style="width: 88%" class="va-t">
+			<iframe ID="testIframe" Name="testIframe" FRAMEBORDER=0 SCROLLING="no" width=100%  height=600px
+					SRC="asset_files_table.html"></iframe>
+		</td>
+	</tr>
+</table>
+<div>
+
+</div>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script> 
+<script type="text/javascript">
+var setting = {
+	view: {
+		dblClickExpand: false,
+		showLine: false,
+		selectedMulti: false
+	},
+	data: {
+		simpleData: {
+			enable:true,
+			idKey: "id",
+			pIdKey: "pId",
+			rootPId: ""
+		}
+	},
+	callback: {
+		beforeClick: function(treeId, treeNode) {
+
+		    /*将所有的div全部隐藏*/
+            $('#testIframe').contents().find("#baseInfo").hide();
+            $('#testIframe').contents().find("#portInfo").hide();
+            $('#testIframe').contents().find("#procInfo").hide();
+
+		    if(treeNode.name == '基本信息'){
+                $('#testIframe').contents().find("#baseInfo").show();
+			}else if(treeNode.name == '端口信息'){
+                $('#testIframe').contents().find("#portInfo").show();
+			}else if(treeNode.name == '进程信息'){
+                $('#testIframe').contents().find("#procInfo").show();
+            }
+
+
+			/*var zTree = $.fn.zTree.getZTreeObj("tree");
+
+			if(treeNode.isParent){
+			    /!*  cookie设置age=-1 *!/
+			    $.cookie("isParent","y")
+			}else{
+                $.cookie("isParent","n")
+			}
+
+			/!*点击集团业务系统节点，将当前的主键记录在cookie中*!/
+			$.cookie("groupId",treeNode.nodepk);//选中的集团业务系统的主键
+			$.cookie("groupName",treeNode.name);//选中的集团业务系统的名称
+
+
+			/!*点击节点时，判断是否是第三级节点*!/
+            var currentId =  treeNode.id;
+            var isThree = "n";
+            if(currentId > 1000){
+                isThree = "y";//当前是第三级节点，y
+			}
+            $.cookie("isThree",isThree);
+
+			//alert(treeNode.nodepk);//每一个treeNode == { id:1, pId:0, name:"移动集团",aaa:0, open:true},
+			$.ajax({
+				url:'/BsGroupProvController/findTableDataByNodeId',
+				data:'nodeId='+treeNode.nodepk,
+				dataType:'json',
+				success:function (data) {
+					/!*data.amBsGroup;*!/
+					groupBaseInfo(data.amBsGroup);
+					///data.provDTOS;
+					showProvs(data.provDTOS);
+                }
+			});*/
+
+            //$('#testIframe').contents().find("#bs_name").text("哈哈哈");
+
+            /*  1、点击某个节点，将节点的主键存在cookie中*/
+            /*2、打开页面*/
+			//demoIframe.attr("src","bs_group_table.html");/*点击了<a href="xxxxx">aaaa</a>      打开bs_group_table.html页面*/
+			/* 3，页面加载出来之后，取当前节点的主键 -- >ajax   */
+
+			//alert(treeNode.aaa)
+			//treeNode 当前点击的节点
+			/*if (treeNode.isParent) {
+                //demoIframe.attr("src","system-base.html");
+				zTree.expandNode(treeNode);
+				return true;
+			} else {
+				//demoIframe.attr("src","system-base.html");
+				return true;
+			}*/
+		}
+	}
+};
+
+/*
+*	资产信息菜单
+* */
+var zNodes =[
+    { id:1, pId:0, name:"基本信息"},
+    { id:2, pId:0, name:"端口信息"},
+    { id:3, pId:0, name:"进程信息"},
+    { id:4, pId:0, name:"服务信息"},
+    { id:5, pId:0, name:"软件信息"},
+    { id:6, pId:0, name:"启动项信息"},
+    { id:7, pId:0, name:"补丁信息"},
+    { id:8, pId:0, name:"动态属性"}
+];
+
+$(document).ready(function(){
+    var t = $("#treeDemo");
+    t = $.fn.zTree.init(t, setting, zNodes);
+    demoIframe = $("#testIframe");
+    //demoIframe.on("load", loadReady);
+    var zTree = $.fn.zTree.getZTreeObj("tree");
+    /*zTree.selectNode(zTree.getNodeByParam("id",2));*/
+});
+
+
+</script>
+</body>
+</html>

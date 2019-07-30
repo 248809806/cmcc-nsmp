@@ -454,6 +454,76 @@ public class AmAssetExtendPropExample {
             return (Criteria) this;
         }
 
+        public Criteria andPhysicalPositionIsNull() {
+            addCriterion("PHYSICAL_POSITION is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhysicalPositionIsNotNull() {
+            addCriterion("PHYSICAL_POSITION is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhysicalPositionEqualTo(String value) {
+            addCriterion("PHYSICAL_POSITION =", value, "physicalPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhysicalPositionNotEqualTo(String value) {
+            addCriterion("PHYSICAL_POSITION <>", value, "physicalPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhysicalPositionGreaterThan(String value) {
+            addCriterion("PHYSICAL_POSITION >", value, "physicalPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhysicalPositionGreaterThanOrEqualTo(String value) {
+            addCriterion("PHYSICAL_POSITION >=", value, "physicalPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhysicalPositionLessThan(String value) {
+            addCriterion("PHYSICAL_POSITION <", value, "physicalPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhysicalPositionLessThanOrEqualTo(String value) {
+            addCriterion("PHYSICAL_POSITION <=", value, "physicalPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhysicalPositionLike(String value) {
+            addCriterion("PHYSICAL_POSITION like", value, "physicalPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhysicalPositionNotLike(String value) {
+            addCriterion("PHYSICAL_POSITION not like", value, "physicalPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhysicalPositionIn(List<String> values) {
+            addCriterion("PHYSICAL_POSITION in", values, "physicalPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhysicalPositionNotIn(List<String> values) {
+            addCriterion("PHYSICAL_POSITION not in", values, "physicalPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhysicalPositionBetween(String value1, String value2) {
+            addCriterion("PHYSICAL_POSITION between", value1, value2, "physicalPosition");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhysicalPositionNotBetween(String value1, String value2) {
+            addCriterion("PHYSICAL_POSITION not between", value1, value2, "physicalPosition");
+            return (Criteria) this;
+        }
+
         public Criteria andDepartmentIsNull() {
             addCriterion("DEPARTMENT is null");
             return (Criteria) this;

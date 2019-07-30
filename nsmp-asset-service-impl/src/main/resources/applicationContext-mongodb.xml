@@ -9,7 +9,7 @@
 
     <!-- spring连接mongodb数据库的配置 -->
     <!-- credentials权限认证：用户名:密码@数据库名 -->
-    <mongo:mongo-client host="192.168.27.135" port="27017"
+    <mongo:mongo-client host="192.168.27.142" port="27017"
                         credentials="u_mydb:123456@mydb" id="mongo">
         <mongo:client-options write-concern="SAFE" />
     </mongo:mongo-client>

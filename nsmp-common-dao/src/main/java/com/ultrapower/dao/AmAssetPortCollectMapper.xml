@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ultrapower.dao.AmAssetPortCollectMapper" >
+  <resultMap id="BaseResultMap" type="com.ultrapower.pojo.AmAssetPortCollect" >
+    <id column="PK_ASSET_PORT_COLLECT" property="pkAssetPortCollect" jdbcType="CHAR" />
+    <result column="PK_ASSET" property="pkAsset" jdbcType="CHAR" />
+    <result column="PROV_CODE" property="provCode" jdbcType="VARCHAR" />
+    <result column="VERSION" property="version" jdbcType="VARCHAR" />
+    <result column="PROTOCOL" property="protocol" jdbcType="VARCHAR" />
+    <result column="LOCAL_ADDR" property="localAddr" jdbcType="VARCHAR" />
+    <result column="PORT" property="port" jdbcType="VARCHAR" />
+    <result column="REMOTE_ADDR" property="remoteAddr" jdbcType="VARCHAR" />
+    <result column="REMOTE_PORT" property="remotePort" jdbcType="VARCHAR" />
+    <result column="CONN_STATE" property="connState" jdbcType="VARCHAR" />
+    <result column="PORT_DESC" property="portDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PK_ASSET_PORT_COLLECT, PK_ASSET, PROV_CODE, VERSION, PROTOCOL, LOCAL_ADDR, PORT, 
+    REMOTE_ADDR, REMOTE_PORT, CONN_STATE, PORT_DESC
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ultrapower.pojo.AmAssetPortCollectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from am_asset_port_collect
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from am_asset_port_collect
+    where PK_ASSET_PORT_COLLECT = #{pkAssetPortCollect,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from am_asset_port_collect
+    where PK_ASSET_PORT_COLLECT = #{pkAssetPortCollect,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ultrapower.pojo.AmAssetPortCollectExample" >
+    delete from am_asset_port_collect
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ultrapower.pojo.AmAssetPortCollect" >
+    insert into am_asset_port_collect (PK_ASSET_PORT_COLLECT, PK_ASSET, PROV_CODE, 
+      VERSION, PROTOCOL, LOCAL_ADDR, 
+      PORT, REMOTE_ADDR, REMOTE_PORT, 
+      CONN_STATE, PORT_DESC)
+    values (#{pkAssetPortCollect,jdbcType=CHAR}, #{pkAsset,jdbcType=CHAR}, #{provCode,jdbcType=VARCHAR}, 
+      #{version,jdbcType=VARCHAR}, #{protocol,jdbcType=VARCHAR}, #{localAddr,jdbcType=VARCHAR}, 
+      #{port,jdbcType=VARCHAR}, #{remoteAddr,jdbcType=VARCHAR}, #{remotePort,jdbcType=VARCHAR}, 
+      #{connState,jdbcType=VARCHAR}, #{portDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ultrapower.pojo.AmAssetPortCollect" >
+    insert into am_asset_port_collect
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pkAssetPortCollect != null" >
+        PK_ASSET_PORT_COLLECT,
+      </if>
+      <if test="pkAsset != null" >
+        PK_ASSET,
+      </if>
+      <if test="provCode != null" >
+        PROV_CODE,
+      </if>
+      <if test="version != null" >
+        VERSION,
+      </if>
+      <if test="protocol != null" >
+        PROTOCOL,
+      </if>
+      <if test="localAddr != null" >
+        LOCAL_ADDR,
+      </if>
+      <if test="port != null" >
+        PORT,
+      </if>
+      <if test="remoteAddr != null" >
+        REMOTE_ADDR,
+      </if>
+      <if test="remotePort != null" >
+        REMOTE_PORT,
+      </if>
+      <if test="connState != null" >
+        CONN_STATE,
+      </if>
+      <if test="portDesc != null" >
+        PORT_DESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pkAssetPortCollect != null" >
+        #{pkAssetPortCollect,jdbcType=CHAR},
+      </if>
+      <if test="pkAsset != null" >
+        #{pkAsset,jdbcType=CHAR},
+      </if>
+      <if test="provCode != null" >
+        #{provCode,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="protocol != null" >
+        #{protocol,jdbcType=VARCHAR},
+      </if>
+      <if test="localAddr != null" >
+        #{localAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null" >
+        #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="remoteAddr != null" >
+        #{remoteAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="remotePort != null" >
+        #{remotePort,jdbcType=VARCHAR},
+      </if>
+      <if test="connState != null" >
+        #{connState,jdbcType=VARCHAR},
+      </if>
+      <if test="portDesc != null" >
+        #{portDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ultrapower.pojo.AmAssetPortCollectExample" resultType="java.lang.Integer" >
+    select count(*) from am_asset_port_collect
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update am_asset_port_collect
+    <set >
+      <if test="record.pkAssetPortCollect != null" >
+        PK_ASSET_PORT_COLLECT = #{record.pkAssetPortCollect,jdbcType=CHAR},
+      </if>
+      <if test="record.pkAsset != null" >
+        PK_ASSET = #{record.pkAsset,jdbcType=CHAR},
+      </if>
+      <if test="record.provCode != null" >
+        PROV_CODE = #{record.provCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null" >
+        VERSION = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.protocol != null" >
+        PROTOCOL = #{record.protocol,jdbcType=VARCHAR},
+      </if>
+      <if test="record.localAddr != null" >
+        LOCAL_ADDR = #{record.localAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.port != null" >
+        PORT = #{record.port,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remoteAddr != null" >
+        REMOTE_ADDR = #{record.remoteAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remotePort != null" >
+        REMOTE_PORT = #{record.remotePort,jdbcType=VARCHAR},
+      </if>
+      <if test="record.connState != null" >
+        CONN_STATE = #{record.connState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.portDesc != null" >
+        PORT_DESC = #{record.portDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update am_asset_port_collect
+    set PK_ASSET_PORT_COLLECT = #{record.pkAssetPortCollect,jdbcType=CHAR},
+      PK_ASSET = #{record.pkAsset,jdbcType=CHAR},
+      PROV_CODE = #{record.provCode,jdbcType=VARCHAR},
+      VERSION = #{record.version,jdbcType=VARCHAR},
+      PROTOCOL = #{record.protocol,jdbcType=VARCHAR},
+      LOCAL_ADDR = #{record.localAddr,jdbcType=VARCHAR},
+      PORT = #{record.port,jdbcType=VARCHAR},
+      REMOTE_ADDR = #{record.remoteAddr,jdbcType=VARCHAR},
+      REMOTE_PORT = #{record.remotePort,jdbcType=VARCHAR},
+      CONN_STATE = #{record.connState,jdbcType=VARCHAR},
+      PORT_DESC = #{record.portDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ultrapower.pojo.AmAssetPortCollect" >
+    update am_asset_port_collect
+    <set >
+      <if test="pkAsset != null" >
+        PK_ASSET = #{pkAsset,jdbcType=CHAR},
+      </if>
+      <if test="provCode != null" >
+        PROV_CODE = #{provCode,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        VERSION = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="protocol != null" >
+        PROTOCOL = #{protocol,jdbcType=VARCHAR},
+      </if>
+      <if test="localAddr != null" >
+        LOCAL_ADDR = #{localAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null" >
+        PORT = #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="remoteAddr != null" >
+        REMOTE_ADDR = #{remoteAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="remotePort != null" >
+        REMOTE_PORT = #{remotePort,jdbcType=VARCHAR},
+      </if>
+      <if test="connState != null" >
+        CONN_STATE = #{connState,jdbcType=VARCHAR},
+      </if>
+      <if test="portDesc != null" >
+        PORT_DESC = #{portDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PK_ASSET_PORT_COLLECT = #{pkAssetPortCollect,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ultrapower.pojo.AmAssetPortCollect" >
+    update am_asset_port_collect
+    set PK_ASSET = #{pkAsset,jdbcType=CHAR},
+      PROV_CODE = #{provCode,jdbcType=VARCHAR},
+      VERSION = #{version,jdbcType=VARCHAR},
+      PROTOCOL = #{protocol,jdbcType=VARCHAR},
+      LOCAL_ADDR = #{localAddr,jdbcType=VARCHAR},
+      PORT = #{port,jdbcType=VARCHAR},
+      REMOTE_ADDR = #{remoteAddr,jdbcType=VARCHAR},
+      REMOTE_PORT = #{remotePort,jdbcType=VARCHAR},
+      CONN_STATE = #{connState,jdbcType=VARCHAR},
+      PORT_DESC = #{portDesc,jdbcType=VARCHAR}
+    where PK_ASSET_PORT_COLLECT = #{pkAssetPortCollect,jdbcType=CHAR}
+  </update>
+</mapper>

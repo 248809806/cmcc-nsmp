@@ -20,6 +20,7 @@ public class AmUserserviceimpl implements AmUserservice {
 
     @Autowired
     RedisTemplate redisTemplate;
+
     /**
      * 用户登录校验
      * @param user
@@ -50,7 +51,7 @@ public class AmUserserviceimpl implements AmUserservice {
                     cookie.setMaxAge(-1);
                     cookie.setPath("/");
                     response.addCookie(cookie);
-                    //保持用户ID和用户名
+                    //保存用户ID和用户名
                     Cookie pkNsmpUser = new Cookie("pkNsmpUser",amUserRueryVO.getUser().getPkNsmpUser());
                     pkNsmpUser.setMaxAge(-1);
                     pkNsmpUser.setPath("/");

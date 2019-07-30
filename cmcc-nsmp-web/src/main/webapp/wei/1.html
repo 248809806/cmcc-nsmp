@@ -1,0 +1,80 @@
+<body>
+<script src="vue.js"></script>
+<script src="jquery-2.2.3.min.js"></script>
+<div id="wei">
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody v-for="user in lala">
+            <tr>
+                <th>{{user.id}}</th>
+                <th>{{user.name}}</th>
+                <th>{{user.age}}</th>
+                <th>
+                    <a @click="eit(user)">编辑</a>
+                    <a @click="del(user.id)">删除</a>
+                </th>
+            </tr>
+        </tbody>
+    </table>
+<hr/>
+    <form>
+        ID:<input type="text" v-model="nene.id"><br/>
+        姓名:<input type="text" v-model="nene.name"><br/>
+        年龄:<input type="text" v-model="nene.age"><br/>
+        <input type="button" value="保存" @click="sss">
+        <input type="button" value="查询" @click="Git"><br/>
+        {{nene}}
+    </form>
+</div>
+<script>
+    var datawei ={
+        lala:[{id:1,name:"tom",age:10},{id:2,name:"tim",age:12},{id:3,name:"jack",age:30}],
+        nene:{id:'',name:"",age:''}
+    }
+    new Vue({
+        el:'#wei',
+        data:datawei,
+        methods:{
+            sss:function () {
+                if(this.nene.id == ''){
+
+                }else {
+                    this.lala.push(this.nene);
+                    this.nene={id:'',name:"",age:''};
+                }
+            },
+            eit:function (user) {
+                this.nene = user;
+            },
+            del:function (id) {
+                for(var i = 0 ; i < this.lala.length ; i++){
+                    if(this.lala[i].id == id){
+                        this.lala.splice(i,1);
+                        break;
+                    }
+                }
+            },
+            Git:function () {
+                var self = this;
+                $.ajax({
+                    url: '/adduser',
+                    type: 'post',
+                    data: JSON.stringify(self.nene),
+                    contentType:'application/json;charset=UTF-8',
+                    dataType: 'json'
+                }).then(function (res) {
+                        self.nene = {id:'',name:"",age:''};
+
+                });
+            }
+        }
+    })
+</script>
+</body>

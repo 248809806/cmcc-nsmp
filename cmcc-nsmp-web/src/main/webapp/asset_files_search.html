@@ -1,0 +1,140 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5shiv.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title>权限管理</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 资产管理 <span class="c-gray en">&gt;</span> 资产档案</nav>
+<div class="page-container" id="container">
+	<div class="text-l">
+		<button type="button" class="btn btn-primary" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 高级检索</button>
+		<button type="button" class="btn btn-primary" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 普通检索</button>
+	</div>
+	<div class="text-c" style="background-color: #f2f0ff;margin-top: 5px;line-height: 45px;margin-bottom: 5px">
+			<input type="text" class="input-text" style="width:500px;text-align-last: center;height: 30px;" v-model="keywords">
+			<button type="button" @click="Search"  class="btn btn-primary" style="text-align-last: center;height: 30px;">
+				<i class="Hui-iconfont">&#xe665;</i> 搜索
+			</button>
+	</div>
+	<div class="text-l">查找到的相关结果为 <span v-text="totalElements">1</span> 条 </div>
+	<table class="table table-border table-bordered table-bg">
+		<tbody>
+			<tr class="text-l" v-for=" a in assets">
+				<td>
+					<a href="asset_files.html" @click="Get(a)">
+						<span style="color: #0f9ae0;font-weight: bold">省份：</span><span style="color: #df54e0;font-weight: bold" v-text="a.assetProv">北京</span>&emsp;&emsp;&emsp;
+						<span style="color: #0f9ae0;font-weight: bold">资产IP：</span><span style="color: #7de068;font-weight: bold" v-text="a.assetIp">192.168.203.10</span>&emsp;&emsp;&emsp;
+						<span style="color: #0f9ae0;font-weight: bold">资产名称：</span><span style="color: #3647e0;font-weight: bold" v-html="a.assetName">192.168.203.10-hp</span>&emsp;&emsp;&emsp;
+						<span style="color: #0f9ae0;font-weight: bold">资产类型：</span><span style="color: #e01b40;font-weight: bold" v-text="a.assetType">操作系统->HP-UX</span>&emsp;&emsp;&emsp;<br>
+						<span>
+							资产名称：192.168.203.10-<span style="color: red;background-color: yellow;font-weight: bold">hp</span>
+						</span>
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script> 
+<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+<script type="text/javascript">
+/*
+	参数解释：
+	title	标题
+	url		请求的url
+	id		需要操作的数据id
+	w		弹出层宽度（缺省调默认值）
+	h		弹出层高度（缺省调默认值）
+*/
+/*管理员-权限-添加*/
+function admin_permission_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+/*管理员-权限-编辑*/
+function admin_permission_edit(title,url,id,w,h){
+	layer_show(title,url,w,h);
+}
+
+/*管理员-权限-删除*/
+function admin_permission_del(obj,id){
+	layer.confirm('确认要删除吗？',function(index){
+		$.ajax({
+			type: 'POST',
+			url: '',
+			dataType: 'json',
+			success: function(data){
+				$(obj).parents("tr").remove();
+				layer.msg('已删除!',{icon:1,time:1000});
+			},
+			error:function(data) {
+				console.log(data.msg);
+			},
+		});		
+	});
+}
+</script>
+
+<br>
+
+<script src="wei/vue.js"></script>
+<script src="wei/axios.min.js"></script>
+<script>
+	new Vue({
+		el:"#container",
+		data:{
+		    assets:[],
+			keywords:'',
+            totalElements:0
+		},
+		methods:{
+            Search:function () {
+                var v = this;
+                $.ajax({
+                    type: "get",
+                    url: "http://localhost:8888/es/assets/queryAssetFilesByKeywords",
+                    data:{"assetName":v.keywords},
+                    dataType: 'jsonp',
+                    jsonpCallback: "callback",
+                    success: function(data) {
+                        v.assets = data;
+                        v.totalElements = data.length;
+                    },
+                    error: function() { //【失败回调】
+                        alert(1)
+                    }
+                });
+            },
+            Get:function (a) {
+                $.cookie("pkAsset",a.pkAsset);
+
+            }
+		}
+	});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ultrapower.dao.AmAssetProcCollectMapper" >
+  <resultMap id="BaseResultMap" type="com.ultrapower.pojo.AmAssetProcCollect" >
+    <id column="PK_ASSET_PROC_COLLECT" property="pkAssetProcCollect" jdbcType="CHAR" />
+    <result column="PK_ASSET" property="pkAsset" jdbcType="CHAR" />
+    <result column="PROV_CODE" property="provCode" jdbcType="VARCHAR" />
+    <result column="VERSION" property="version" jdbcType="VARCHAR" />
+    <result column="PROC_NAME" property="procName" jdbcType="VARCHAR" />
+    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="PID" property="pid" jdbcType="VARCHAR" />
+    <result column="PPID" property="ppid" jdbcType="VARCHAR" />
+    <result column="START_TIME" property="startTime" jdbcType="VARCHAR" />
+    <result column="RUN_TIME" property="runTime" jdbcType="VARCHAR" />
+    <result column="START_FILE" property="startFile" jdbcType="VARCHAR" />
+    <result column="WORK_PATH" property="workPath" jdbcType="VARCHAR" />
+    <result column="START_CMD" property="startCmd" jdbcType="VARCHAR" />
+    <result column="PROC_DESC" property="procDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PK_ASSET_PROC_COLLECT, PK_ASSET, PROV_CODE, VERSION, PROC_NAME, USERNAME, PID, PPID, 
+    START_TIME, RUN_TIME, START_FILE, WORK_PATH, START_CMD, PROC_DESC
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ultrapower.pojo.AmAssetProcCollectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from am_asset_proc_collect
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from am_asset_proc_collect
+    where PK_ASSET_PROC_COLLECT = #{pkAssetProcCollect,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from am_asset_proc_collect
+    where PK_ASSET_PROC_COLLECT = #{pkAssetProcCollect,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ultrapower.pojo.AmAssetProcCollectExample" >
+    delete from am_asset_proc_collect
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ultrapower.pojo.AmAssetProcCollect" >
+    insert into am_asset_proc_collect (PK_ASSET_PROC_COLLECT, PK_ASSET, PROV_CODE, 
+      VERSION, PROC_NAME, USERNAME, 
+      PID, PPID, START_TIME, 
+      RUN_TIME, START_FILE, WORK_PATH, 
+      START_CMD, PROC_DESC)
+    values (#{pkAssetProcCollect,jdbcType=CHAR}, #{pkAsset,jdbcType=CHAR}, #{provCode,jdbcType=VARCHAR}, 
+      #{version,jdbcType=VARCHAR}, #{procName,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{pid,jdbcType=VARCHAR}, #{ppid,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, 
+      #{runTime,jdbcType=VARCHAR}, #{startFile,jdbcType=VARCHAR}, #{workPath,jdbcType=VARCHAR}, 
+      #{startCmd,jdbcType=VARCHAR}, #{procDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ultrapower.pojo.AmAssetProcCollect" >
+    insert into am_asset_proc_collect
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pkAssetProcCollect != null" >
+        PK_ASSET_PROC_COLLECT,
+      </if>
+      <if test="pkAsset != null" >
+        PK_ASSET,
+      </if>
+      <if test="provCode != null" >
+        PROV_CODE,
+      </if>
+      <if test="version != null" >
+        VERSION,
+      </if>
+      <if test="procName != null" >
+        PROC_NAME,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="pid != null" >
+        PID,
+      </if>
+      <if test="ppid != null" >
+        PPID,
+      </if>
+      <if test="startTime != null" >
+        START_TIME,
+      </if>
+      <if test="runTime != null" >
+        RUN_TIME,
+      </if>
+      <if test="startFile != null" >
+        START_FILE,
+      </if>
+      <if test="workPath != null" >
+        WORK_PATH,
+      </if>
+      <if test="startCmd != null" >
+        START_CMD,
+      </if>
+      <if test="procDesc != null" >
+        PROC_DESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pkAssetProcCollect != null" >
+        #{pkAssetProcCollect,jdbcType=CHAR},
+      </if>
+      <if test="pkAsset != null" >
+        #{pkAsset,jdbcType=CHAR},
+      </if>
+      <if test="provCode != null" >
+        #{provCode,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="procName != null" >
+        #{procName,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="ppid != null" >
+        #{ppid,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="runTime != null" >
+        #{runTime,jdbcType=VARCHAR},
+      </if>
+      <if test="startFile != null" >
+        #{startFile,jdbcType=VARCHAR},
+      </if>
+      <if test="workPath != null" >
+        #{workPath,jdbcType=VARCHAR},
+      </if>
+      <if test="startCmd != null" >
+        #{startCmd,jdbcType=VARCHAR},
+      </if>
+      <if test="procDesc != null" >
+        #{procDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ultrapower.pojo.AmAssetProcCollectExample" resultType="java.lang.Integer" >
+    select count(*) from am_asset_proc_collect
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update am_asset_proc_collect
+    <set >
+      <if test="record.pkAssetProcCollect != null" >
+        PK_ASSET_PROC_COLLECT = #{record.pkAssetProcCollect,jdbcType=CHAR},
+      </if>
+      <if test="record.pkAsset != null" >
+        PK_ASSET = #{record.pkAsset,jdbcType=CHAR},
+      </if>
+      <if test="record.provCode != null" >
+        PROV_CODE = #{record.provCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null" >
+        VERSION = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.procName != null" >
+        PROC_NAME = #{record.procName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        USERNAME = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pid != null" >
+        PID = #{record.pid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ppid != null" >
+        PPID = #{record.ppid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTime != null" >
+        START_TIME = #{record.startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.runTime != null" >
+        RUN_TIME = #{record.runTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startFile != null" >
+        START_FILE = #{record.startFile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workPath != null" >
+        WORK_PATH = #{record.workPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startCmd != null" >
+        START_CMD = #{record.startCmd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.procDesc != null" >
+        PROC_DESC = #{record.procDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update am_asset_proc_collect
+    set PK_ASSET_PROC_COLLECT = #{record.pkAssetProcCollect,jdbcType=CHAR},
+      PK_ASSET = #{record.pkAsset,jdbcType=CHAR},
+      PROV_CODE = #{record.provCode,jdbcType=VARCHAR},
+      VERSION = #{record.version,jdbcType=VARCHAR},
+      PROC_NAME = #{record.procName,jdbcType=VARCHAR},
+      USERNAME = #{record.username,jdbcType=VARCHAR},
+      PID = #{record.pid,jdbcType=VARCHAR},
+      PPID = #{record.ppid,jdbcType=VARCHAR},
+      START_TIME = #{record.startTime,jdbcType=VARCHAR},
+      RUN_TIME = #{record.runTime,jdbcType=VARCHAR},
+      START_FILE = #{record.startFile,jdbcType=VARCHAR},
+      WORK_PATH = #{record.workPath,jdbcType=VARCHAR},
+      START_CMD = #{record.startCmd,jdbcType=VARCHAR},
+      PROC_DESC = #{record.procDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ultrapower.pojo.AmAssetProcCollect" >
+    update am_asset_proc_collect
+    <set >
+      <if test="pkAsset != null" >
+        PK_ASSET = #{pkAsset,jdbcType=CHAR},
+      </if>
+      <if test="provCode != null" >
+        PROV_CODE = #{provCode,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        VERSION = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="procName != null" >
+        PROC_NAME = #{procName,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        PID = #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="ppid != null" >
+        PPID = #{ppid,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        START_TIME = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="runTime != null" >
+        RUN_TIME = #{runTime,jdbcType=VARCHAR},
+      </if>
+      <if test="startFile != null" >
+        START_FILE = #{startFile,jdbcType=VARCHAR},
+      </if>
+      <if test="workPath != null" >
+        WORK_PATH = #{workPath,jdbcType=VARCHAR},
+      </if>
+      <if test="startCmd != null" >
+        START_CMD = #{startCmd,jdbcType=VARCHAR},
+      </if>
+      <if test="procDesc != null" >
+        PROC_DESC = #{procDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PK_ASSET_PROC_COLLECT = #{pkAssetProcCollect,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ultrapower.pojo.AmAssetProcCollect" >
+    update am_asset_proc_collect
+    set PK_ASSET = #{pkAsset,jdbcType=CHAR},
+      PROV_CODE = #{provCode,jdbcType=VARCHAR},
+      VERSION = #{version,jdbcType=VARCHAR},
+      PROC_NAME = #{procName,jdbcType=VARCHAR},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      PID = #{pid,jdbcType=VARCHAR},
+      PPID = #{ppid,jdbcType=VARCHAR},
+      START_TIME = #{startTime,jdbcType=VARCHAR},
+      RUN_TIME = #{runTime,jdbcType=VARCHAR},
+      START_FILE = #{startFile,jdbcType=VARCHAR},
+      WORK_PATH = #{workPath,jdbcType=VARCHAR},
+      START_CMD = #{startCmd,jdbcType=VARCHAR},
+      PROC_DESC = #{procDesc,jdbcType=VARCHAR}
+    where PK_ASSET_PROC_COLLECT = #{pkAssetProcCollect,jdbcType=CHAR}
+  </update>
+</mapper>

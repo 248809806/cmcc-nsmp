@@ -1,8 +1,8 @@
 package com.ultrapower.web;
 
-
-import com.ultrapower.dao.AmAssetMapper;
 import com.ultrapower.dto.AmassetpvlistVO;
+import com.ultrapower.dto.Assetpeoplist;
+import com.ultrapower.pojo.AmAsset;
 import com.ultrapower.pojo.AmAssetProp;
 import com.ultrapower.service.AmAssetTypeService;
 import com.ultrapower.service.AssetpropserviceInterface;
@@ -170,6 +170,38 @@ public class AssetpropControler {
     @GetMapping("/selectassetinitlist")
     public Map<String, Object> selectassetinitlist(){
         Map<String, Object> map = assetpropservice.selectassetinitlist();
+        return map;
+    }
+
+    /**
+     * 查询资产属性添加列表里的基本属性
+     * @return
+     */
+    @GetMapping("/selectAmAssetlist")
+    public List<AmAsset> selectAmAssetlist() {
+        List<AmAsset> amAssets = assetpropservice.selectAmAssetlist();
+        return amAssets;
+    }
+
+    /**
+     * 保存资产属性添加列表里的数据
+     * @param assetpeoplist
+     * @return
+     */
+    @GetMapping("/addassetpeoplist")
+    public Map<String, Object> addassetpeoplist(Assetpeoplist assetpeoplist) {
+        Map<String, Object> addassetpeoplist = assetpropservice.addassetpeoplist(assetpeoplist);
+        return addassetpeoplist;
+    }
+
+    /**
+     * 通过页面传过来的ID主键查询基本，端口，进程表的信息
+     * @param pkAsset
+     * @return
+     */
+    @GetMapping("/getassetfilesmap")
+    public Map<String,Object> getassetfilesmap(String pkAsset){
+        Map<String, Object> map = assetpropservice.getassetfilesmap(pkAsset);
         return map;
     }
 }

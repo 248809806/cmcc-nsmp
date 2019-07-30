@@ -20,6 +20,7 @@
         <module name="nsmp-asset-service-impl" />
         <module name="nsmp-asset-service-interface" />
         <module name="nsmp-asset-web" />
+        <module name="nsmp-commom-mq" />
         <module name="nsmp-common-dao" />
         <module name="nsmp-common-pojo" />
         <module name="nsmp-common-service" />

@@ -1,6 +1,8 @@
 package com.ultrapower.pojo;
 
-public class AmAssetExtendProp {
+import java.io.Serializable;
+
+public class AmAssetExtendProp implements Serializable {
     private String pkAsset;
 
     private String provCode;
@@ -10,6 +12,8 @@ public class AmAssetExtendProp {
     private String securityZone;
 
     private String region;
+
+    private String physicalPosition;
 
     private String department;
 
@@ -43,7 +47,7 @@ public class AmAssetExtendProp {
 
     private String devicename;
 
-    private byte[] physicalPosition;
+    private static final long serialVersionUID = 1L;
 
     public String getPkAsset() {
         return pkAsset;
@@ -83,6 +87,14 @@ public class AmAssetExtendProp {
 
     public void setRegion(String region) {
         this.region = region == null ? null : region.trim();
+    }
+
+    public String getPhysicalPosition() {
+        return physicalPosition;
+    }
+
+    public void setPhysicalPosition(String physicalPosition) {
+        this.physicalPosition = physicalPosition == null ? null : physicalPosition.trim();
     }
 
     public String getDepartment() {
@@ -213,11 +225,36 @@ public class AmAssetExtendProp {
         this.devicename = devicename == null ? null : devicename.trim();
     }
 
-    public byte[] getPhysicalPosition() {
-        return physicalPosition;
-    }
-
-    public void setPhysicalPosition(byte[] physicalPosition) {
-        this.physicalPosition = physicalPosition;
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", pkAsset=").append(pkAsset);
+        sb.append(", provCode=").append(provCode);
+        sb.append(", version=").append(version);
+        sb.append(", securityZone=").append(securityZone);
+        sb.append(", region=").append(region);
+        sb.append(", physicalPosition=").append(physicalPosition);
+        sb.append(", department=").append(department);
+        sb.append(", publicIp=").append(publicIp);
+        sb.append(", privateIp=").append(privateIp);
+        sb.append(", natIp=").append(natIp);
+        sb.append(", virtualIp=").append(virtualIp);
+        sb.append(", administratorUser=").append(administratorUser);
+        sb.append(", administratorPhone=").append(administratorPhone);
+        sb.append(", acceptanceState=").append(acceptanceState);
+        sb.append(", ownership=").append(ownership);
+        sb.append(", hostIp=").append(hostIp);
+        sb.append(", installPath=").append(installPath);
+        sb.append(", pkVendor=").append(pkVendor);
+        sb.append(", hardwareModel=").append(hardwareModel);
+        sb.append(", operatingSystemName=").append(operatingSystemName);
+        sb.append(", operatingSystemVersion=").append(operatingSystemVersion);
+        sb.append(", devicename=").append(devicename);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

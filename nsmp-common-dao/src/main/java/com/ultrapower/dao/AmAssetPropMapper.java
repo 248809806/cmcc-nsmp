@@ -1,5 +1,6 @@
 package com.ultrapower.dao;
 
+import com.ultrapower.dto.AmAssetPropDTO;
 import com.ultrapower.pojo.AmAssetProp;
 import com.ultrapower.pojo.AmAssetPropExample;
 import org.apache.ibatis.annotations.Param;
@@ -33,4 +34,6 @@ public interface AmAssetPropMapper {
     List<AmAssetProp> findPropListByAssetTypeId(String id);
 
     List<AmAssetProp> findPropListByAssetTypeIdAndprop(HashMap<String, String> map);
+
+    List<AmAssetPropDTO> getAssetPropByPkAssetType(String pkAssetType);
 }

@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.ultrapower.dao.*;
 import com.ultrapower.dto.Amassetdto;
 import com.ultrapower.dto.AmassetpvlistVO;
+import com.ultrapower.dto.Assetpeoplist;
 import com.ultrapower.pojo.*;
 import com.ultrapower.utils.DatetypetoString;
 import com.ultrapower.utils.PkUtils;
@@ -14,6 +15,21 @@ import java.util.*;
 
 @Service
 public class AssetpropserviceImpl implements AssetpropserviceInterface{
+
+    @Autowired
+    AmAssetProcCollectMapper procCollectMapper;
+
+    @Autowired
+    AmAssetPortCollectMapper portCollectMapper;
+
+    @Autowired
+    AmAssetExtendPropMapper propMapper;
+
+    @Autowired
+    AmBsProvMapper amBsProvMapper;
+
+    @Autowired
+    AmAssetTypeMapper amAssetTypeMapper;
 
     @Autowired
     AmAssetMapper amAssetMapper;
@@ -333,5 +349,74 @@ public class AssetpropserviceImpl implements AssetpropserviceInterface{
         map.put("amAssets",amAssets);
         return map;
     }
+
+    /**
+     * 查询资产属性添加列表里的基本属性
+     * @return
+     */
+    public List<AmAsset> selectAmAssetlist() {
+        List<AmAsset> amAssets = amAssetMapper.selectByExample(null);
+        List<AmBsProv> amBsProvs = amBsProvMapper.selectByExample(null);
+        List<AmAssetType> amAssetTypes = amAssetTypeMapper.selectByExample(null);
+        for(int k = 0; k<amAssetTypes.size();k++) {
+            AmAssetType amAssetType = amAssetTypes.get(k);
+            String typeName1 = amAssetType.getTypeName();
+            for (int i = 0; i < amBsProvs.size(); i++) {
+                AmBsProv amBsProv = amBsProvs.get(i);
+                String typeName = amBsProv.getBsName();
+                for (int j = 0; j < amAssets.size(); j++) {
+                    AmAsset amAsset = amAssets.get(j);
+                    amAsset.setPkProvBs(typeName);
+                    amAsset.setPkAssetType(typeName1);
+                }
+            }
+        }
+        return amAssets;
+    }
+
+    /**
+     * 保存资产属性添加列表里的数据（查询资产类型下拉框的数据）
+     * @param assetpeoplist
+     * @return
+     */
+    public Map<String, Object> addassetpeoplist(Assetpeoplist assetpeoplist) {
+        Map<String, Object> map = new HashMap<String, Object>();
+
+        return map;
+    }
+
+    /**
+     * 通过页面传过来的ID主键查询基本，端口，进程表的信息
+     * @param pkAsset
+     * @return
+     */
+    public Map<String, Object> getassetfilesmap(String pkAsset) {
+        Map<String,Object> map = new HashMap<String, Object>();
+
+        //1.基本信息
+        AmAsset amAsset = amAssetMapper.selectByPrimaryKey(pkAsset);
+
+        //2.基本信息扩展表
+        AmAssetExtendProp extendProp = propMapper.selectByPrimaryKey(pkAsset);
+
+        //3.端口信息
+        AmAssetPortCollectExample collectExample = new AmAssetPortCollectExample();
+        AmAssetPortCollectExample.Criteria criteria = collectExample.createCriteria();
+        criteria.andPkAssetEqualTo(pkAsset);
+        List<AmAssetPortCollect> amAssetPortCollects = portCollectMapper.selectByExample(collectExample);
+
+        //4.进程信息
+        AmAssetProcCollectExample amAssetProcCollectExample = new AmAssetProcCollectExample();
+        AmAssetProcCollectExample.Criteria criteria1 = amAssetProcCollectExample.createCriteria();
+        criteria1.andPkAssetEqualTo(pkAsset);
+        List<AmAssetProcCollect> amAssetProcCollects = procCollectMapper.selectByExample(amAssetProcCollectExample);
+
+        map.put("amAsset",amAsset);
+        map.put("extendProp",extendProp);
+        map.put("amAssetPortCollects",amAssetPortCollects);
+        map.put("amAssetProcCollects",amAssetProcCollects);
+        return map;
+    }
+
 
 }

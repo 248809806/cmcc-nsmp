@@ -11,17 +11,21 @@ public interface AmAssetExtendPropMapper {
 
     int deleteByExample(AmAssetExtendPropExample example);
 
+    int deleteByPrimaryKey(String pkAsset);
+
     int insert(AmAssetExtendProp record);
 
     int insertSelective(AmAssetExtendProp record);
 
-    List<AmAssetExtendProp> selectByExampleWithBLOBs(AmAssetExtendPropExample example);
-
     List<AmAssetExtendProp> selectByExample(AmAssetExtendPropExample example);
+
+    AmAssetExtendProp selectByPrimaryKey(String pkAsset);
 
     int updateByExampleSelective(@Param("record") AmAssetExtendProp record, @Param("example") AmAssetExtendPropExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") AmAssetExtendProp record, @Param("example") AmAssetExtendPropExample example);
-
     int updateByExample(@Param("record") AmAssetExtendProp record, @Param("example") AmAssetExtendPropExample example);
+
+    int updateByPrimaryKeySelective(AmAssetExtendProp record);
+
+    int updateByPrimaryKey(AmAssetExtendProp record);
 }

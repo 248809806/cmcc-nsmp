@@ -1,6 +1,8 @@
 package com.ultrapower.service;
 
 import com.ultrapower.dto.AmassetpvlistVO;
+import com.ultrapower.dto.Assetpeoplist;
+import com.ultrapower.pojo.AmAsset;
 import com.ultrapower.pojo.AmAssetProp;
 
 import java.util.List;
@@ -91,6 +93,25 @@ public interface AssetpropserviceInterface {
      * @return
      */
     Map<String,Object> selectassetinitlist();
+
+    /**
+     * 查询资产属性添加列表里的基本属性
+     * @return
+     */
+    List<AmAsset> selectAmAssetlist();
+    /**
+     * 保存资产属性添加列表里的数据（查询资产类型下拉框的数据）
+     * @param assetpeoplist
+     * @return
+     */
+    Map<String,Object> addassetpeoplist(Assetpeoplist assetpeoplist);
+
+    /**
+     * 通过页面传过来的ID主键查询基本，端口，进程表的信息
+     * @param pkAsset
+     * @return
+     */
+    Map<String,Object> getassetfilesmap(String pkAsset);
 
 }
 

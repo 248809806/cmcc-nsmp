@@ -2,11 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ultrapower.dao.AmAssetExtendPropMapper" >
   <resultMap id="BaseResultMap" type="com.ultrapower.pojo.AmAssetExtendProp" >
-    <result column="PK_ASSET" property="pkAsset" jdbcType="CHAR" />
+    <id column="PK_ASSET" property="pkAsset" jdbcType="CHAR" />
     <result column="PROV_CODE" property="provCode" jdbcType="VARCHAR" />
     <result column="VERSION" property="version" jdbcType="VARCHAR" />
     <result column="SECURITY_ZONE" property="securityZone" jdbcType="VARCHAR" />
     <result column="REGION" property="region" jdbcType="VARCHAR" />
+    <result column="PHYSICAL_POSITION" property="physicalPosition" jdbcType="VARCHAR" />
     <result column="DEPARTMENT" property="department" jdbcType="VARCHAR" />
     <result column="PUBLIC_IP" property="publicIp" jdbcType="VARCHAR" />
     <result column="PRIVATE_IP" property="privateIp" jdbcType="VARCHAR" />
@@ -23,9 +24,6 @@
     <result column="OPERATING_SYSTEM_NAME" property="operatingSystemName" jdbcType="VARCHAR" />
     <result column="OPERATING_SYSTEM_VERSION" property="operatingSystemVersion" jdbcType="VARCHAR" />
     <result column="DEVICENAME" property="devicename" jdbcType="VARCHAR" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.ultrapower.pojo.AmAssetExtendProp" extends="BaseResultMap" >
-    <result column="PHYSICAL_POSITION" property="physicalPosition" jdbcType="VARBINARY" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -86,30 +84,11 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    PK_ASSET, PROV_CODE, VERSION, SECURITY_ZONE, REGION, DEPARTMENT, PUBLIC_IP, PRIVATE_IP, 
-    NAT_IP, VIRTUAL_IP, ADMINISTRATOR_USER, ADMINISTRATOR_PHONE, ACCEPTANCE_STATE, OWNERSHIP, 
-    HOST_IP, INSTALL_PATH, PK_VENDOR, HARDWARE_MODEL, OPERATING_SYSTEM_NAME, OPERATING_SYSTEM_VERSION, 
-    DEVICENAME
+    PK_ASSET, PROV_CODE, VERSION, SECURITY_ZONE, REGION, PHYSICAL_POSITION, DEPARTMENT, 
+    PUBLIC_IP, PRIVATE_IP, NAT_IP, VIRTUAL_IP, ADMINISTRATOR_USER, ADMINISTRATOR_PHONE, 
+    ACCEPTANCE_STATE, OWNERSHIP, HOST_IP, INSTALL_PATH, PK_VENDOR, HARDWARE_MODEL, OPERATING_SYSTEM_NAME, 
+    OPERATING_SYSTEM_VERSION, DEVICENAME
   </sql>
-  <sql id="Blob_Column_List" >
-    PHYSICAL_POSITION
-  </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.ultrapower.pojo.AmAssetExtendPropExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from am_asset_extend_prop
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ultrapower.pojo.AmAssetExtendPropExample" >
     select
     <if test="distinct" >
@@ -124,6 +103,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from am_asset_extend_prop
+    where PK_ASSET = #{pkAsset,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from am_asset_extend_prop
+    where PK_ASSET = #{pkAsset,jdbcType=CHAR}
+  </delete>
   <delete id="deleteByExample" parameterType="com.ultrapower.pojo.AmAssetExtendPropExample" >
     delete from am_asset_extend_prop
     <if test="_parameter != null" >
@@ -132,21 +121,21 @@
   </delete>
   <insert id="insert" parameterType="com.ultrapower.pojo.AmAssetExtendProp" >
     insert into am_asset_extend_prop (PK_ASSET, PROV_CODE, VERSION, 
-      SECURITY_ZONE, REGION, DEPARTMENT, 
-      PUBLIC_IP, PRIVATE_IP, NAT_IP, 
-      VIRTUAL_IP, ADMINISTRATOR_USER, ADMINISTRATOR_PHONE, 
-      ACCEPTANCE_STATE, OWNERSHIP, HOST_IP, 
-      INSTALL_PATH, PK_VENDOR, HARDWARE_MODEL, 
-      OPERATING_SYSTEM_NAME, OPERATING_SYSTEM_VERSION, 
-      DEVICENAME, PHYSICAL_POSITION)
+      SECURITY_ZONE, REGION, PHYSICAL_POSITION, 
+      DEPARTMENT, PUBLIC_IP, PRIVATE_IP, 
+      NAT_IP, VIRTUAL_IP, ADMINISTRATOR_USER, 
+      ADMINISTRATOR_PHONE, ACCEPTANCE_STATE, OWNERSHIP, 
+      HOST_IP, INSTALL_PATH, PK_VENDOR, 
+      HARDWARE_MODEL, OPERATING_SYSTEM_NAME, OPERATING_SYSTEM_VERSION, 
+      DEVICENAME)
     values (#{pkAsset,jdbcType=CHAR}, #{provCode,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, 
-      #{securityZone,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, 
-      #{publicIp,jdbcType=VARCHAR}, #{privateIp,jdbcType=VARCHAR}, #{natIp,jdbcType=VARCHAR}, 
-      #{virtualIp,jdbcType=VARCHAR}, #{administratorUser,jdbcType=VARCHAR}, #{administratorPhone,jdbcType=VARCHAR}, 
-      #{acceptanceState,jdbcType=SMALLINT}, #{ownership,jdbcType=SMALLINT}, #{hostIp,jdbcType=VARCHAR}, 
-      #{installPath,jdbcType=VARCHAR}, #{pkVendor,jdbcType=CHAR}, #{hardwareModel,jdbcType=VARCHAR}, 
-      #{operatingSystemName,jdbcType=VARCHAR}, #{operatingSystemVersion,jdbcType=VARCHAR}, 
-      #{devicename,jdbcType=VARCHAR}, #{physicalPosition,jdbcType=VARBINARY})
+      #{securityZone,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, #{physicalPosition,jdbcType=VARCHAR}, 
+      #{department,jdbcType=VARCHAR}, #{publicIp,jdbcType=VARCHAR}, #{privateIp,jdbcType=VARCHAR}, 
+      #{natIp,jdbcType=VARCHAR}, #{virtualIp,jdbcType=VARCHAR}, #{administratorUser,jdbcType=VARCHAR}, 
+      #{administratorPhone,jdbcType=VARCHAR}, #{acceptanceState,jdbcType=SMALLINT}, #{ownership,jdbcType=SMALLINT}, 
+      #{hostIp,jdbcType=VARCHAR}, #{installPath,jdbcType=VARCHAR}, #{pkVendor,jdbcType=CHAR}, 
+      #{hardwareModel,jdbcType=VARCHAR}, #{operatingSystemName,jdbcType=VARCHAR}, #{operatingSystemVersion,jdbcType=VARCHAR}, 
+      #{devicename,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ultrapower.pojo.AmAssetExtendProp" >
     insert into am_asset_extend_prop
@@ -165,6 +154,9 @@
       </if>
       <if test="region != null" >
         REGION,
+      </if>
+      <if test="physicalPosition != null" >
+        PHYSICAL_POSITION,
       </if>
       <if test="department != null" >
         DEPARTMENT,
@@ -214,9 +206,6 @@
       <if test="devicename != null" >
         DEVICENAME,
       </if>
-      <if test="physicalPosition != null" >
-        PHYSICAL_POSITION,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="pkAsset != null" >
@@ -233,6 +222,9 @@
       </if>
       <if test="region != null" >
         #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="physicalPosition != null" >
+        #{physicalPosition,jdbcType=VARCHAR},
       </if>
       <if test="department != null" >
         #{department,jdbcType=VARCHAR},
@@ -282,9 +274,6 @@
       <if test="devicename != null" >
         #{devicename,jdbcType=VARCHAR},
       </if>
-      <if test="physicalPosition != null" >
-        #{physicalPosition,jdbcType=VARBINARY},
-      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ultrapower.pojo.AmAssetExtendPropExample" resultType="java.lang.Integer" >
@@ -310,6 +299,9 @@
       </if>
       <if test="record.region != null" >
         REGION = #{record.region,jdbcType=VARCHAR},
+      </if>
+      <if test="record.physicalPosition != null" >
+        PHYSICAL_POSITION = #{record.physicalPosition,jdbcType=VARCHAR},
       </if>
       <if test="record.department != null" >
         DEPARTMENT = #{record.department,jdbcType=VARCHAR},
@@ -359,38 +351,7 @@
       <if test="record.devicename != null" >
         DEVICENAME = #{record.devicename,jdbcType=VARCHAR},
       </if>
-      <if test="record.physicalPosition != null" >
-        PHYSICAL_POSITION = #{record.physicalPosition,jdbcType=VARBINARY},
-      </if>
     </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map" >
-    update am_asset_extend_prop
-    set PK_ASSET = #{record.pkAsset,jdbcType=CHAR},
-      PROV_CODE = #{record.provCode,jdbcType=VARCHAR},
-      VERSION = #{record.version,jdbcType=VARCHAR},
-      SECURITY_ZONE = #{record.securityZone,jdbcType=VARCHAR},
-      REGION = #{record.region,jdbcType=VARCHAR},
-      DEPARTMENT = #{record.department,jdbcType=VARCHAR},
-      PUBLIC_IP = #{record.publicIp,jdbcType=VARCHAR},
-      PRIVATE_IP = #{record.privateIp,jdbcType=VARCHAR},
-      NAT_IP = #{record.natIp,jdbcType=VARCHAR},
-      VIRTUAL_IP = #{record.virtualIp,jdbcType=VARCHAR},
-      ADMINISTRATOR_USER = #{record.administratorUser,jdbcType=VARCHAR},
-      ADMINISTRATOR_PHONE = #{record.administratorPhone,jdbcType=VARCHAR},
-      ACCEPTANCE_STATE = #{record.acceptanceState,jdbcType=SMALLINT},
-      OWNERSHIP = #{record.ownership,jdbcType=SMALLINT},
-      HOST_IP = #{record.hostIp,jdbcType=VARCHAR},
-      INSTALL_PATH = #{record.installPath,jdbcType=VARCHAR},
-      PK_VENDOR = #{record.pkVendor,jdbcType=CHAR},
-      HARDWARE_MODEL = #{record.hardwareModel,jdbcType=VARCHAR},
-      OPERATING_SYSTEM_NAME = #{record.operatingSystemName,jdbcType=VARCHAR},
-      OPERATING_SYSTEM_VERSION = #{record.operatingSystemVersion,jdbcType=VARCHAR},
-      DEVICENAME = #{record.devicename,jdbcType=VARCHAR},
-      PHYSICAL_POSITION = #{record.physicalPosition,jdbcType=VARBINARY}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -402,6 +363,7 @@
       VERSION = #{record.version,jdbcType=VARCHAR},
       SECURITY_ZONE = #{record.securityZone,jdbcType=VARCHAR},
       REGION = #{record.region,jdbcType=VARCHAR},
+      PHYSICAL_POSITION = #{record.physicalPosition,jdbcType=VARCHAR},
       DEPARTMENT = #{record.department,jdbcType=VARCHAR},
       PUBLIC_IP = #{record.publicIp,jdbcType=VARCHAR},
       PRIVATE_IP = #{record.privateIp,jdbcType=VARCHAR},
@@ -421,5 +383,99 @@
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ultrapower.pojo.AmAssetExtendProp" >
+    update am_asset_extend_prop
+    <set >
+      <if test="provCode != null" >
+        PROV_CODE = #{provCode,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        VERSION = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="securityZone != null" >
+        SECURITY_ZONE = #{securityZone,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null" >
+        REGION = #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="physicalPosition != null" >
+        PHYSICAL_POSITION = #{physicalPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        DEPARTMENT = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="publicIp != null" >
+        PUBLIC_IP = #{publicIp,jdbcType=VARCHAR},
+      </if>
+      <if test="privateIp != null" >
+        PRIVATE_IP = #{privateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="natIp != null" >
+        NAT_IP = #{natIp,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualIp != null" >
+        VIRTUAL_IP = #{virtualIp,jdbcType=VARCHAR},
+      </if>
+      <if test="administratorUser != null" >
+        ADMINISTRATOR_USER = #{administratorUser,jdbcType=VARCHAR},
+      </if>
+      <if test="administratorPhone != null" >
+        ADMINISTRATOR_PHONE = #{administratorPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptanceState != null" >
+        ACCEPTANCE_STATE = #{acceptanceState,jdbcType=SMALLINT},
+      </if>
+      <if test="ownership != null" >
+        OWNERSHIP = #{ownership,jdbcType=SMALLINT},
+      </if>
+      <if test="hostIp != null" >
+        HOST_IP = #{hostIp,jdbcType=VARCHAR},
+      </if>
+      <if test="installPath != null" >
+        INSTALL_PATH = #{installPath,jdbcType=VARCHAR},
+      </if>
+      <if test="pkVendor != null" >
+        PK_VENDOR = #{pkVendor,jdbcType=CHAR},
+      </if>
+      <if test="hardwareModel != null" >
+        HARDWARE_MODEL = #{hardwareModel,jdbcType=VARCHAR},
+      </if>
+      <if test="operatingSystemName != null" >
+        OPERATING_SYSTEM_NAME = #{operatingSystemName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatingSystemVersion != null" >
+        OPERATING_SYSTEM_VERSION = #{operatingSystemVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="devicename != null" >
+        DEVICENAME = #{devicename,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PK_ASSET = #{pkAsset,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ultrapower.pojo.AmAssetExtendProp" >
+    update am_asset_extend_prop
+    set PROV_CODE = #{provCode,jdbcType=VARCHAR},
+      VERSION = #{version,jdbcType=VARCHAR},
+      SECURITY_ZONE = #{securityZone,jdbcType=VARCHAR},
+      REGION = #{region,jdbcType=VARCHAR},
+      PHYSICAL_POSITION = #{physicalPosition,jdbcType=VARCHAR},
+      DEPARTMENT = #{department,jdbcType=VARCHAR},
+      PUBLIC_IP = #{publicIp,jdbcType=VARCHAR},
+      PRIVATE_IP = #{privateIp,jdbcType=VARCHAR},
+      NAT_IP = #{natIp,jdbcType=VARCHAR},
+      VIRTUAL_IP = #{virtualIp,jdbcType=VARCHAR},
+      ADMINISTRATOR_USER = #{administratorUser,jdbcType=VARCHAR},
+      ADMINISTRATOR_PHONE = #{administratorPhone,jdbcType=VARCHAR},
+      ACCEPTANCE_STATE = #{acceptanceState,jdbcType=SMALLINT},
+      OWNERSHIP = #{ownership,jdbcType=SMALLINT},
+      HOST_IP = #{hostIp,jdbcType=VARCHAR},
+      INSTALL_PATH = #{installPath,jdbcType=VARCHAR},
+      PK_VENDOR = #{pkVendor,jdbcType=CHAR},
+      HARDWARE_MODEL = #{hardwareModel,jdbcType=VARCHAR},
+      OPERATING_SYSTEM_NAME = #{operatingSystemName,jdbcType=VARCHAR},
+      OPERATING_SYSTEM_VERSION = #{operatingSystemVersion,jdbcType=VARCHAR},
+      DEVICENAME = #{devicename,jdbcType=VARCHAR}
+    where PK_ASSET = #{pkAsset,jdbcType=CHAR}
   </update>
 </mapper>

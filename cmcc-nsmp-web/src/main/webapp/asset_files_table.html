@@ -1,0 +1,429 @@
+﻿<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="Bookmark" href="/favicon.ico">
+    <link rel="Shortcut Icon" href="/favicon.ico"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="lib/html5shiv.js"></script>
+    <script type="text/javascript" src="lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="static/h-ui.admin/skin/default/skin.css" id="skin"/>
+    <link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/style.css"/>
+    <!--[if IE 6]>
+    <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <!--/meta 作为公共模版分离出去-->
+</head>
+<body>
+<div id="tab-system" class="HuiTab">
+    <!--顶行显示栏-->
+    <!--{{amAsset}}-->
+    <div style="background-color: #f2f0ff;line-height: 30px;margin-bottom: 5px">
+        <span style="font-weight: bold"> &nbsp;· 资产ip：</span><span v-text="amAsset.assetIp">192.168.203.10</span>&emsp;&emsp;
+        <span style="font-weight: bold">资产名称：</span><span v-text="amAsset.assetName">192.168.203.10xxx</span>&emsp;&emsp;
+        <span style="font-weight: bold">业务系统：</span><span v-text="amAsset.pkProvBs">北京总公司->房山</span>&emsp;&emsp;
+        <span style="font-weight: bold">资产类型：</span><span v-text="amAsset.pkAssetType">操作系统->HP-UX</span>&emsp;&emsp;
+    </div>
+
+
+    <!--基本信息-->
+    <div id="baseInfo">
+        <table class="table table-border table-bordered table-bg table-hover table-sort">
+            <tbody>
+                <tr class="text-l">
+                    <td style="font-weight: bold">资产IP</td>
+                    <td v-text="amAsset.assetIp">192.168.1.1</td>
+                    <td style="font-weight: bold">资产来源</td>
+                    <td v-text="amAsset.comeFrom">人工录入</td>
+                </tr>
+                <tr class="text-l">
+                    <td style="font-weight: bold">资产名称</td>
+                    <td v-text="amAsset.assetName">192.168.203.10xxx</td>
+                    <td style="font-weight: bold">资产编码</td>
+                    <td v-text="amAsset.assetCode"></td>
+                </tr>
+                <tr class="text-l">
+                    <td style="font-weight: bold">资产类型</td>
+                    <td v-text="amAsset.pkAssetType">操作系统->HP-UX</td>
+                    <td style="font-weight: bold">所属业务系统</td>
+                    <td v-text="amAsset.pkProvBs">北京总公司->房山</td>
+                </tr>
+                <tr><td colspan="4" height="1px" style="background-color: #f2f0ff"></td></tr>
+                <tr class="text-l">
+                    <td style="font-weight: bold">系统名称</td>
+                    <td>HP-UX</td>
+                    <td style="font-weight: bold">硬件厂商</td>
+                    <td></td>
+                </tr>
+                <tr class="text-l">
+                    <td style="font-weight: bold">系统版本</td>
+                    <td>B.11.31</td>
+                    <td style="font-weight: bold">硬件型号</td>
+                    <td>rx2660</td>
+                </tr>
+                <tr><td colspan="4" height="1px" style="background-color: #f2f0ff"></td></tr>
+                <tr class="text-l">
+                    <td style="font-weight: bold">资产状态</td>
+                    <td colspan="3">临时</td>
+                </tr>
+                <tr class="text-l">
+                    <td style="font-weight: bold">上线操作人</td>
+                    <td></td>
+                    <td style="font-weight: bold">上线操作时间</td>
+                    <td></td>
+                </tr>
+                <tr><td colspan="4" height="1px" style="background-color: #f2f0ff"></td></tr>
+                <tr class="text-l">
+                    <td style="font-weight: bold">公网IP</td>
+                    <td></td>
+                    <td style="font-weight: bold">私网IP</td>
+                    <td></td>
+                </tr>
+                <tr class="text-l">
+                    <td style="font-weight: bold">DCN网IP</td>
+                    <td></td>
+                    <td style="font-weight: bold">NAT IP</td>
+                    <td></td>
+                </tr>
+                <tr><td colspan="4" height="1px" style="background-color: #f2f0ff"></td></tr>
+                <tr class="text-l">
+                    <td style="font-weight: bold">所属安全域</td>
+                    <td></td>
+                    <td style="font-weight: bold">所属地域</td>
+                    <td></td>
+                </tr>
+                <tr class="text-l">
+                    <td style="font-weight: bold">机房位置</td>
+                    <td></td>
+                    <td style="font-weight: bold">所属部门</td>
+                    <td></td>
+                </tr>
+                <tr><td colspan="4" height="1px" style="background-color: #f2f0ff"></td></tr>
+                <tr class="text-l">
+                    <td style="font-weight: bold">安全管理员</td>
+                    <td></td>
+                    <td style="font-weight: bold">安全管理员手机</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--端口信息-->
+    <div id="portInfo" style="display: none">
+        <div class="text-l" style="background-color: #f2f0ff;line-height: 30px;margin-bottom: 5px;font-weight: bold">&emsp;最新端口列表</div>
+        <div style="line-height: 30px;font-weight: bold;float: left;">&emsp;登录采集</div>
+        <div class="text-c btn btn-primary radius" style="font-weight: bold;color: white;float: right;background-color: #00a0e9;border-bottom: 20px" onclick="asset_files_history('端口历史版本信息','asset_files_history_port.html')">历史版本</div><br>
+        <div class="text-l" style="background-color: #f2f0ff;line-height: 35px;margin-top: 15px;margin-bottom: 5px;">
+            <form action="">
+                &emsp;&emsp;本地端口：
+                <input type="text" class="input-text" name="assetKeyWords" style="width:150px">&emsp;
+                <input type="button" class="text-c btn btn-primary radius" value="查询">
+                <input type="reset" class="text-c btn btn-primary radius" value="重置">
+                <span style="float: right;margin-right: 15px">采集时间：2018-01-16 06:00:02</span>
+            </form>
+        </div>
+        <table class="table table-border table-bordered table-bg table-hover table-sort">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>端口协议</th>
+                    <th>本地地址</th>
+                    <th>本地端口</th>
+                    <th>远程地址</th>
+                    <th>远程端口</th>
+                    <th>连接状态</th>
+                    <th>端口描述</th>
+                </tr>
+            </thead>
+            <tbody>
+            <template v-for="(amport,index) in amAssetPortCollects">
+                <tr class="text-l">
+                    <td>{{index+1}}</td>
+                    <td v-text="amport.localAddr"></td>
+                    <td v-text="amport.localAddr">*</td>
+                    <td v-text="amport.port">50008</td>
+                    <td v-text="amport.remoteAddr">*</td>
+                    <td v-text="amport.remotePort">*</td>
+                    <td v-text="amport.connState">LISTEN</td>
+                    <td v-text="amport.portDesc">X</td>
+                </tr>
+            </template>
+            </tbody>
+        </table>
+        <div class="text-l" style="line-height: 35px;margin-top: 15px;margin-bottom: 5px;">
+            <form action="">
+                &emsp;当前第<span>1</span>页，共<span>5</span>页。总条数：<span>100</span>条
+                <input type="button" class="text-c btn btn-primary radius" style="float: right" value="下一页">
+                <input type="button" class="text-c btn btn-primary radius" style="float: right;margin-right: 10px" value="上一页">
+            </form>
+        </div>
+    </div>
+
+    <!--进程信息-->
+    <div id="procInfo" style="display: none">
+        <div class="text-l" style="background-color: #f2f0ff;line-height: 30px;margin-bottom: 5px;font-weight: bold">&emsp;最新进程列表</div>
+        <div style="line-height: 30px;font-weight: bold;float: left;">&emsp;登录采集</div>
+        <div class="text-c btn btn-primary radius" style="font-weight: bold;color: white;float: right;background-color: #00a0e9;border-bottom: 20px" onclick="asset_files_history('进程历史版本信息','asset_files_history_proc.html')">历史版本</div><br>
+        <div class="text-l" style="background-color: #f2f0ff;line-height: 35px;margin-top: 15px;margin-bottom: 5px;">
+            <form action="">
+                &emsp;&emsp;进程名称：
+                <input type="text" class="input-text" name="assetKeyWords" style="width:150px">&emsp;
+                <input type="button" class="text-c btn btn-primary radius" value="查询">
+                <input type="reset" class="text-c btn btn-primary radius" value="重置">
+                <span style="float: right;margin-right: 15px">采集时间：2018-01-16 06:01:03</span>
+            </form>
+        </div>
+        <table class="table table-border table-bordered table-bg table-hover table-sort">
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th>进程名称</th>
+                <th>所属用户</th>
+                <th>PID</th>
+                <th>PPID</th>
+                <th>启动时间</th>
+                <th>运行时间</th>
+                <th>启动文件</th>
+                <th>当前工作路径</th>
+                <th>启动命令</th>
+            </tr>
+            </thead>
+            <tbody>
+            <template v-for="(apc,index) in amAssetProcCollects">
+            <tr class="text-l">
+                <td>{{index+1}}</td>
+                <td v-text="apc.procName"></td>
+                <td v-text="apc.username"></td>
+                <td v-text="apc.pid"></td>
+                <td v-text="apc.ppid"></td>
+                <td v-text="apc.startTime"></td>
+                <td v-text="apc.runTime"></td>
+                <td v-text="apc.startFile"></td>
+                <td v-text="apc.workPath"></td>
+                <td v-text="apc.startCmd"></td>
+            </tr>
+            </template>
+            </tbody>
+        </table>
+        <div class="text-l" style="line-height: 35px;margin-top: 15px;margin-bottom: 5px;">
+            <form action="">
+                &emsp;当前第<span>1</span>页，共<span>5</span>页。总条数：<span>100</span>条
+                <input type="button" class="text-c btn btn-primary radius" style="float: right" value="下一页">
+                <input type="button" class="text-c btn btn-primary radius" style="float: right;margin-right: 10px" value="上一页">
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+        $("#tab-system").Huitab({
+            index: 0
+        });
+    });
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+<script src="wei/vue.js"></script>
+<script>
+    /*查看资产信息*/
+    function bs_group_look_asset(title,url,id,w,h){
+        parent.parent.layer_show(title,url,w,h);
+    }
+
+    /*删除省份业务系统映射   count 当前行的管辖资产数量  */
+    function bs_prov_del(obj,id,count){
+        parent.parent.layer.confirm('确定要删除该业务系统信息吗？',function(index){
+            $.ajax({
+                type: 'get',
+                data:'groupBsId='+$.cookie("groupId")+'&provBsId='+id,
+                url: '/BsGroupProvController/deleteProvGroupMapping',
+                dataType: 'json',
+                success: function(data){
+                    if(data.code == 1 ){
+                        $(obj).parents("tr").remove();
+
+                        var a = parseInt($("#m_asset_count").text());/*总和*/
+                        var b = parseInt(count);/*当前行数量*/
+                        $("#m_asset_count").text( a-b );
+
+                        layer.msg('已删除!',{icon:1,time:1000});
+                        parent.parent.layer.close(index);
+                    }else {
+                        layer.msg('删除失败!',{icon:0,time:1000});
+                        parent.parent.layer.close(index);
+                    }
+                },
+                error:function(data) {
+                    console.log(data.msg);
+                },
+            });
+        });
+    }
+
+    /*手动映射*/
+    function mapping_group_prov(title,url,w,h){
+        //parent.parent.layer_show(title,url,w,h);
+        layer_show(title,url,w,h);
+    }
+
+    /*
+    * 就在弹出框 映射成功之后，调用这个方法，刷新表格数据
+    * */
+    function showProvs(data) {
+        //provstb
+        var sum = 0 ;
+        var str = '';
+        for (var i = 0 ; i<data.length;i++){
+            sum+= parseInt(data[i].assetCount);
+
+            str+='<tr class="text-c">' +
+                '<td>'+(i+1)+'</td>' +
+                '<td>'+data[i].provName+'</td>' +
+                '<td>'+data[i].bsName+'</td>' +
+                '<td>'+data[i].matchType+'</td>' +
+                '<td>'+data[i].assetCount+'</td>' +
+                '<td class="f-14">' +
+                '<a title="删除省份业务系统映射" onclick="bs_prov_del(this,\''+data[i].pkBsProv+'\','+data[i].assetCount+')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>' +
+                '</td></tr>';
+        }
+        $("#provstb").html(str);
+        $("#m_asset_count").text(sum);
+    }
+
+    /**
+     * 点击管辖资产，加载查询面板的下拉框数据
+     */
+    function initMgAssetQuery(){
+        $.ajax({
+            url:"/BsGroupProvController/initMgAssetQuery",
+            dataType:'json',
+            success:function (data) {
+                provSelect(data.provs);//省份下拉框
+                assetTypesSelect(data.assetTypes);//类型下拉框
+                assetTable(data.bsGroupMgAssets);//表格数据
+            }
+        });
+    }
+    /*省份下拉框 */
+    function provSelect(data) {
+        var str = "<option value='' selected>请选择省份</option>";
+        for(var i = 0 ; i < data.length ;i++){
+            str += "<option value='"+data[i].provCode+"'>"+data[i].provName+"</option>";
+        }
+        $("#prov").html(str);
+    }
+    /*资产类型下拉框*/
+    function assetTypesSelect(data) {
+        var str = "<option value='' selected>请选择类型</option>";
+        for(var i = 0 ; i < data.length ;i++){
+            str += "<option value='"+data[i].pkAssetType+"'>"+data[i].typeName+"</option>";
+        }
+        $("#assetType").html(str);
+    }
+
+    function assetTable(data) {
+        var str = "";
+        for(var i = 0 ; i < data.length ;i++){
+            str += "<tr class=\"text-c\">" +
+                " <td>"+(i+1)+"</td>" +
+                "<td>"+data[i].g_BS_NAME+"</td>" +
+                "<td>"+data[i].prov_NAME+"</td>" +
+                "<td>"+data[i].p_BS_NAME+"</td>" +
+                "<td>"+data[i].asset_NAME+"</td>" +
+                "<td>"+data[i].asset_IP+"</td>" +
+                "<td>"+data[i].type_NAME+"</td>" +
+                "<td class=\"f-14\">" +
+                "<a style=\"text-decoration:none\"onclick=\"bs_group_look_asset('查看资产信息','bs_group_look_asset.html','0001','780','400')\" href=\"javascript:;\"><span style=\"color: #0e90d2\">查看</span></a>" +
+                " </td></tr>";
+            /*str += "<tr class=\"text-c\">" +
+                " <td>"+(i+1)+"</td>" +
+                "<td>移动集团->核心网系统</td>" +
+                "<td>北京市</td>" +
+                "<td>神州泰岳->信息安全公司</td>" +
+                "<td>192.168.1.101</td>" +
+                "<td>192.168.1.101</td>" +
+                "<td>操作系统->Centos</td>" +
+                "<td class=\"f-14\">" +
+                "<a style=\"text-decoration:none\"onclick=\"bs_group_look_asset('查看资产信息','bs_group_look_asset.html','0001','780','400')\" href=\"javascript:;\"><span style=\"color: #0e90d2\">查看</span></a>" +
+                " </td></tr>";*/
+        }
+        $("#tb").html(str);
+    }
+
+    function searchMgAsset() {
+        $.ajax({
+            url:'/BsGroupProvController/searchMgAsset',
+            data:$("#queryForm").serialize(),
+            dataType:'json',
+            success:function (data) {
+                assetTable(data.bsGroupMgAssets);//表格数据
+            }
+        });
+    }
+
+    /*重新映射*/
+    function bs_group_prov_remapping() {
+        parent.parent.layer_show("重新映射","bs_group_prov_remapping.html",800,500);
+    }
+
+
+    /*历史版本*/
+    function asset_files_history(content,page) {
+        parent.parent.layer_show(content,page,1000,500)
+    }
+
+
+       var mdata={
+           amAsset:{},
+           extendProp:{},
+           amAssetPortCollects:[],
+           amAssetProcCollects:[],
+       }
+
+
+    $(function () {
+        var pkAsset = $.cookie("pkAsset");
+        $.ajax({
+            url:"/getassetfilesmap?pkAsset="+pkAsset,
+            dataType:"json",
+            success:function (data) {
+                mdata = data;
+                new Vue({
+                    el:"#tab-system",
+                    data:mdata,
+                });
+            }
+        })
+    })
+
+</script>
+
+</body>
+</html>

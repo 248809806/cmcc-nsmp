@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ultrapower.dao.AmAssetStartupCollectMapper" >
+  <resultMap id="BaseResultMap" type="com.ultrapower.pojo.AmAssetStartupCollect" >
+    <id column="PK_ASSET_STARTUP_COLLECT" property="pkAssetStartupCollect" jdbcType="CHAR" />
+    <result column="PK_ASSET" property="pkAsset" jdbcType="CHAR" />
+    <result column="PROV_CODE" property="provCode" jdbcType="VARCHAR" />
+    <result column="VERSION" property="version" jdbcType="VARCHAR" />
+    <result column="START_NAME" property="startName" jdbcType="VARCHAR" />
+    <result column="START_FILE" property="startFile" jdbcType="VARCHAR" />
+    <result column="SRV_TYPE" property="srvType" jdbcType="VARCHAR" />
+    <result column="START_TYPE" property="startType" jdbcType="VARCHAR" />
+    <result column="SRV_DESC" property="srvDesc" jdbcType="VARCHAR" />
+    <result column="RUN_STATE" property="runState" jdbcType="VARCHAR" />
+    <result column="RUN_LEVEL" property="runLevel" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PK_ASSET_STARTUP_COLLECT, PK_ASSET, PROV_CODE, VERSION, START_NAME, START_FILE, SRV_TYPE, 
+    START_TYPE, SRV_DESC, RUN_STATE, RUN_LEVEL
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ultrapower.pojo.AmAssetStartupCollectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from am_asset_startup_collect
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from am_asset_startup_collect
+    where PK_ASSET_STARTUP_COLLECT = #{pkAssetStartupCollect,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from am_asset_startup_collect
+    where PK_ASSET_STARTUP_COLLECT = #{pkAssetStartupCollect,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ultrapower.pojo.AmAssetStartupCollectExample" >
+    delete from am_asset_startup_collect
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ultrapower.pojo.AmAssetStartupCollect" >
+    insert into am_asset_startup_collect (PK_ASSET_STARTUP_COLLECT, PK_ASSET, PROV_CODE, 
+      VERSION, START_NAME, START_FILE, 
+      SRV_TYPE, START_TYPE, SRV_DESC, 
+      RUN_STATE, RUN_LEVEL)
+    values (#{pkAssetStartupCollect,jdbcType=CHAR}, #{pkAsset,jdbcType=CHAR}, #{provCode,jdbcType=VARCHAR}, 
+      #{version,jdbcType=VARCHAR}, #{startName,jdbcType=VARCHAR}, #{startFile,jdbcType=VARCHAR}, 
+      #{srvType,jdbcType=VARCHAR}, #{startType,jdbcType=VARCHAR}, #{srvDesc,jdbcType=VARCHAR}, 
+      #{runState,jdbcType=VARCHAR}, #{runLevel,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ultrapower.pojo.AmAssetStartupCollect" >
+    insert into am_asset_startup_collect
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pkAssetStartupCollect != null" >
+        PK_ASSET_STARTUP_COLLECT,
+      </if>
+      <if test="pkAsset != null" >
+        PK_ASSET,
+      </if>
+      <if test="provCode != null" >
+        PROV_CODE,
+      </if>
+      <if test="version != null" >
+        VERSION,
+      </if>
+      <if test="startName != null" >
+        START_NAME,
+      </if>
+      <if test="startFile != null" >
+        START_FILE,
+      </if>
+      <if test="srvType != null" >
+        SRV_TYPE,
+      </if>
+      <if test="startType != null" >
+        START_TYPE,
+      </if>
+      <if test="srvDesc != null" >
+        SRV_DESC,
+      </if>
+      <if test="runState != null" >
+        RUN_STATE,
+      </if>
+      <if test="runLevel != null" >
+        RUN_LEVEL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pkAssetStartupCollect != null" >
+        #{pkAssetStartupCollect,jdbcType=CHAR},
+      </if>
+      <if test="pkAsset != null" >
+        #{pkAsset,jdbcType=CHAR},
+      </if>
+      <if test="provCode != null" >
+        #{provCode,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="startName != null" >
+        #{startName,jdbcType=VARCHAR},
+      </if>
+      <if test="startFile != null" >
+        #{startFile,jdbcType=VARCHAR},
+      </if>
+      <if test="srvType != null" >
+        #{srvType,jdbcType=VARCHAR},
+      </if>
+      <if test="startType != null" >
+        #{startType,jdbcType=VARCHAR},
+      </if>
+      <if test="srvDesc != null" >
+        #{srvDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="runState != null" >
+        #{runState,jdbcType=VARCHAR},
+      </if>
+      <if test="runLevel != null" >
+        #{runLevel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ultrapower.pojo.AmAssetStartupCollectExample" resultType="java.lang.Integer" >
+    select count(*) from am_asset_startup_collect
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update am_asset_startup_collect
+    <set >
+      <if test="record.pkAssetStartupCollect != null" >
+        PK_ASSET_STARTUP_COLLECT = #{record.pkAssetStartupCollect,jdbcType=CHAR},
+      </if>
+      <if test="record.pkAsset != null" >
+        PK_ASSET = #{record.pkAsset,jdbcType=CHAR},
+      </if>
+      <if test="record.provCode != null" >
+        PROV_CODE = #{record.provCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null" >
+        VERSION = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startName != null" >
+        START_NAME = #{record.startName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startFile != null" >
+        START_FILE = #{record.startFile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.srvType != null" >
+        SRV_TYPE = #{record.srvType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startType != null" >
+        START_TYPE = #{record.startType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.srvDesc != null" >
+        SRV_DESC = #{record.srvDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.runState != null" >
+        RUN_STATE = #{record.runState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.runLevel != null" >
+        RUN_LEVEL = #{record.runLevel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update am_asset_startup_collect
+    set PK_ASSET_STARTUP_COLLECT = #{record.pkAssetStartupCollect,jdbcType=CHAR},
+      PK_ASSET = #{record.pkAsset,jdbcType=CHAR},
+      PROV_CODE = #{record.provCode,jdbcType=VARCHAR},
+      VERSION = #{record.version,jdbcType=VARCHAR},
+      START_NAME = #{record.startName,jdbcType=VARCHAR},
+      START_FILE = #{record.startFile,jdbcType=VARCHAR},
+      SRV_TYPE = #{record.srvType,jdbcType=VARCHAR},
+      START_TYPE = #{record.startType,jdbcType=VARCHAR},
+      SRV_DESC = #{record.srvDesc,jdbcType=VARCHAR},
+      RUN_STATE = #{record.runState,jdbcType=VARCHAR},
+      RUN_LEVEL = #{record.runLevel,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ultrapower.pojo.AmAssetStartupCollect" >
+    update am_asset_startup_collect
+    <set >
+      <if test="pkAsset != null" >
+        PK_ASSET = #{pkAsset,jdbcType=CHAR},
+      </if>
+      <if test="provCode != null" >
+        PROV_CODE = #{provCode,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        VERSION = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="startName != null" >
+        START_NAME = #{startName,jdbcType=VARCHAR},
+      </if>
+      <if test="startFile != null" >
+        START_FILE = #{startFile,jdbcType=VARCHAR},
+      </if>
+      <if test="srvType != null" >
+        SRV_TYPE = #{srvType,jdbcType=VARCHAR},
+      </if>
+      <if test="startType != null" >
+        START_TYPE = #{startType,jdbcType=VARCHAR},
+      </if>
+      <if test="srvDesc != null" >
+        SRV_DESC = #{srvDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="runState != null" >
+        RUN_STATE = #{runState,jdbcType=VARCHAR},
+      </if>
+      <if test="runLevel != null" >
+        RUN_LEVEL = #{runLevel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PK_ASSET_STARTUP_COLLECT = #{pkAssetStartupCollect,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ultrapower.pojo.AmAssetStartupCollect" >
+    update am_asset_startup_collect
+    set PK_ASSET = #{pkAsset,jdbcType=CHAR},
+      PROV_CODE = #{provCode,jdbcType=VARCHAR},
+      VERSION = #{version,jdbcType=VARCHAR},
+      START_NAME = #{startName,jdbcType=VARCHAR},
+      START_FILE = #{startFile,jdbcType=VARCHAR},
+      SRV_TYPE = #{srvType,jdbcType=VARCHAR},
+      START_TYPE = #{startType,jdbcType=VARCHAR},
+      SRV_DESC = #{srvDesc,jdbcType=VARCHAR},
+      RUN_STATE = #{runState,jdbcType=VARCHAR},
+      RUN_LEVEL = #{runLevel,jdbcType=VARCHAR}
+    where PK_ASSET_STARTUP_COLLECT = #{pkAssetStartupCollect,jdbcType=CHAR}
+  </update>
+</mapper>

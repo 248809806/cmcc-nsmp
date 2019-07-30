@@ -30,6 +30,7 @@
         <module>namp-ambsprov-service-interface</module>
         <module>namp-ambsprov-service-impl</module>
         <module>namp-ambspeov-web</module>
+        <module>nsmp-commom-mq</module>
     </modules>
 
     <dependencies>
@@ -161,6 +162,13 @@
             <artifactId>druid</artifactId>
             <version>1.0.9</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.3</version>
+        </dependency>
+
 
         <!-- 单元测试 -->
         <dependency>

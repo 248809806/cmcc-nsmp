@@ -1,6 +1,6 @@
 ﻿<!--_meta 作为公共模版分离出去-->
 <!DOCTYPE HTML>
-<html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
@@ -97,27 +97,27 @@
                             <th width="200">资产IP</th>
                             <th width="200">来源</th>
                             <th width="200">资产状态</th>
-                            <th width="200">操作</th>
+                            <th width="300">操作</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="text-c" v-for="asset in assets">
-                            <td>1</td>
-                            <td>{{asset.prov_NAME}}</td>
-                            <td>{{asset.bs_NAME}}</td>
-                            <td>{{asset.type_NAME}}</td>
-                            <td>{{asset.asset_NAME}}</td>
-                            <td>{{asset.asset_IP}}</td>
-                            <td>{{asset.come_FROM}}</td>
-                            <td>{{asset.asset_STATE}}</td>
+                        <tr class="text-c" v-for="(asset,index) in assets">
+                            <td>{{index+1}}</td>
+                            <td>{{asset.provName}}</td>
+                            <td>{{asset.bsName}}</td>
+                            <td>{{asset.typeName}}</td>
+                            <td>{{asset.assetName}}</td>
+                            <td>{{asset.assetIp}}</td>
+                            <td>{{asset.comeFrom}}</td>
+                            <td>{{asset.assetState}}</td>
                             <td class="f-14">
                                 <a style="text-decoration:none"
                                    onclick="bs_group_look_asset('查看资产信息','bs_group_look_asset.html','0001','780','400')"
                                    href="javascript:;"><span style="color: #0e90d2">查看</span>
                                 </a>
-                                <a title="删除" href="javascript:;" onclick="assetStateOn(this,1)" class="ml-5" style="text-decoration:none">上线</a>
-                                <a title="删除" href="javascript:;" onclick="assetStateOff(this,1)" class="ml-5" style="text-decoration:none">下线</a>
-
+                                <a title="上线" href="javascript:;" onclick="assetStateOn(this,1)" class="ml-5" style="text-decoration:none">上线</a>
+                                <a title="下线" href="javascript:;" onclick="assetStateOff(this,1)" class="ml-5" style="text-decoration:none">下线</a>
+                                <a title="编辑" href="javascript:;" class="ml-5" style="text-decoration:none" v-on:click="Edit(asset.pkAsset)">编辑</a>
                             </td>
                         </tr>
                     </tbody>
@@ -167,6 +167,13 @@
                         el: "#isdis",
                         data: {
                             assets: data.amAssets
+
+                        },
+                        methods:{
+                            Edit:function (id) {
+                                var vvv = $.cookie("pkAsset",id);
+                                parent.layer_show("编辑资产信息","asset-edit.html",800,500);
+                            }
                         }
                     });
 
@@ -174,6 +181,7 @@
             });
 
         })
+
     </script>
 <script>
     /*查看资产信息*/
